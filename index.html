@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DataBridge — Ops Intelligence for Outsourced Teams</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #0F1F2E;
+      --navy-mid:   #1E3A4F;
+      --navy-light: #2A5170;
+      --off-white:  #F0F4F8;
+      --teal:       #00C2A8;
+      --teal-dim:   #007A6B;
+      --slate:      #6B8FA8;
+      --slate-light:#A8C0D0;
+      --text:       #E8EFF5;
+      --text-dim:   #8AACC0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--navy);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      position: sticky;
+      top: 0;
+      background: rgba(15,31,46,0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+    }
+
+    .logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.25rem;
+      color: var(--off-white);
+      letter-spacing: -0.01em;
+    }
+
+    .logo span { color: var(--teal); }
+
+    nav a.cta-nav {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--teal);
+      padding: 0.5rem 1.25rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+
+    nav a.cta-nav:hover { opacity: 0.85; }
+
+    /* ── HERO ── */
+    .hero {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2.25rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--off-white);
+      margin-bottom: 1.5rem;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-sub {
+      font-size: 1.125rem;
+      color: var(--text-dim);
+      max-width: 540px;
+      margin: 0 auto 2.5rem;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--teal);
+      color: var(--navy);
+      font-weight: 600;
+      font-size: 0.9375rem;
+      padding: 0.875rem 2rem;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .hero-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .hero-meta {
+      margin-top: 1rem;
+      font-size: 0.8125rem;
+      color: var(--slate);
+    }
+
+    /* ── SIGNAL TICKER ── */
+    .ticker-wrap {
+      margin: 3.5rem auto 0;
+      max-width: 900px;
+      padding: 0 2rem;
+    }
+
+    .ticker-label {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--slate);
+      margin-bottom: 0.5rem;
+      padding-left: 0.25rem;
+    }
+
+    .ticker-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .ticker-box {
+      background: var(--navy-mid);
+      border: 1px solid rgba(0,194,168,0.15);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+      overflow: hidden;
+      height: 148px;
+      position: relative;
+    }
+
+    .ticker-box::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 40px;
+      background: linear-gradient(to top, var(--navy-mid), transparent);
+      pointer-events: none;
+    }
+
+    .ticker-feed {
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+      animation: scroll-up 18s linear infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .ticker-feed { animation: none; }
+    }
+
+    @keyframes scroll-up {
+      0%   { transform: translateY(0); }
+      100% { transform: translateY(-50%); }
+    }
+
+    .ticker-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.875rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      line-height: 1.4;
+    }
+
+    .t-time { color: var(--slate); white-space: nowrap; flex-shrink: 0; }
+    .t-channel { color: var(--teal-dim); white-space: nowrap; flex-shrink: 0; }
+    .t-msg { color: var(--text-dim); }
+    .t-msg strong { color: var(--text); font-weight: 500; }
+    .t-msg .hi { color: var(--teal); }
+
+    /* ── SECTION BASE ── */
+    section { padding: 5rem 2rem; }
+    .inner { max-width: 760px; margin: 0 auto; }
+    .inner-wide { max-width: 960px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--slate);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      color: var(--off-white);
+      margin-bottom: 1rem;
+    }
+
+    h2 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .section-body {
+      font-size: 1.0625rem;
+      color: var(--text-dim);
+      line-height: 1.75;
+      max-width: 600px;
+    }
+
+    /* ── PAIN SECTION ── */
+    .pain { border-top: 1px solid rgba(255,255,255,0.06); }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 3rem;
+    }
+
+    .pain-item {
+      background: var(--navy);
+      padding: 1.75rem;
+    }
+
+    .pain-icon {
+      font-size: 1.25rem;
+      margin-bottom: 0.875rem;
+      opacity: 0.8;
+    }
+
+    .pain-item h3 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--off-white);
+      margin-bottom: 0.5rem;
+    }
+
+    .pain-item p {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    /* ── WHAT YOU GET ── */
+    .layers { background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); }
+
+    .layer-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-top: 3rem;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0,194,168,0.12);
+    }
+
+    .layer {
+      background: var(--navy);
+      padding: 2rem 2.25rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.5rem;
+      align-items: start;
+      transition: background 0.2s;
+    }
+
+    .layer:hover { background: #162D3E; }
+
+    .layer-badge {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(0,194,168,0.12);
+      border: 1px solid rgba(0,194,168,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--teal);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .layer h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--off-white);
+      margin-bottom: 0.375rem;
+    }
+
+    .layer p {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    .layer-tag {
+      display: inline-block;
+      margin-top: 0.625rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: rgba(0,194,168,0.1);
+      color: var(--teal);
+    }
+
+    /* ── HOW IT WORKS ── */
+    .how { border-top: 1px solid rgba(255,255,255,0.06); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      position: relative;
+    }
+
+    .step { position: relative; }
+
+    .step-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--teal);
+      font-weight: 500;
+      margin-bottom: 0.75rem;
+      letter-spacing: 0.06em;
+    }
+
+    .step h3 {
+      font-size: 0.9375rem;
+      font-weight: 600;
+      color: var(--off-white);
+      margin-bottom: 0.375rem;
+    }
+
+    .step p {
+      font-size: 0.8125rem;
+      color: var(--text-dim);
+      line-height: 1.65;
+    }
+
+    .step-line {
+      display: block;
+      width: 24px;
+      height: 1px;
+      background: var(--teal);
+      opacity: 0.4;
+      margin-bottom: 1rem;
+    }
+
+    /* ── DELIVERABLES ── */
+    .deliverables { background: var(--navy-mid); border-top: 1px solid rgba(255,255,255,0.06); }
+
+    .del-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.75rem;
+      margin-top: 2.5rem;
+    }
+
+    .del-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      background: var(--navy);
+      border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .del-check {
+      color: var(--teal);
+      font-size: 0.875rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .del-item span {
+      font-size: 0.875rem;
+      color: var(--text-dim);
+      line-height: 1.5;
+    }
+
+    /* ── PRICE ── */
+    .price-section { border-top: 1px solid rgba(255,255,255,0.06); }
+
+    .price-card {
+      border: 1px solid rgba(0,194,168,0.3);
+      border-radius: 16px;
+      padding: 3rem;
+      max-width: 480px;
+      margin: 3rem auto 0;
+      background: var(--navy-mid);
+      text-align: center;
+    }
+
+    .price-amount {
+      font-family: 'DM Serif Display', serif;
+      font-size: 3.5rem;
+      color: var(--off-white);
+      line-height: 1;
+      margin-bottom: 0.25rem;
+    }
+
+    .price-label {
+      font-size: 0.8125rem;
+      color: var(--slate);
+      margin-bottom: 1.75rem;
+    }
+
+    .price-includes {
+      text-align: left;
+      margin-bottom: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+
+    .pi-item {
+      display: flex;
+      align-items: center;
+      gap: 0.625rem;
+      font-size: 0.875rem;
+      color: var(--text-dim);
+    }
+
+    .pi-check { color: var(--teal); font-size: 0.8125rem; }
+
+    .price-retainer {
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      font-size: 0.8125rem;
+      color: var(--slate);
+    }
+
+    .price-retainer strong { color: var(--text-dim); }
+
+    /* ── CTA / FORM ── */
+    .cta-section {
+      background: linear-gradient(160deg, #0d1e2d 0%, #0F1F2E 60%);
+      border-top: 1px solid rgba(0,194,168,0.15);
+    }
+
+    .cta-section .inner { text-align: center; }
+
+    .cta-section h2 { margin-bottom: 0.75rem; }
+
+    .cta-section .section-body {
+      margin: 0 auto 2.5rem;
+    }
+
+    .form-wrap {
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-group { margin-bottom: 1rem; }
+
+    label {
+      display: block;
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--slate-light);
+      margin-bottom: 0.375rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      background: var(--navy-mid);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 0.75rem 1rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9375rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.15s;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder, textarea::placeholder { color: var(--slate); }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--teal);
+    }
+
+    select option { background: var(--navy-mid); }
+
+    textarea { resize: vertical; min-height: 90px; }
+
+    .form-submit {
+      width: 100%;
+      background: var(--teal);
+      color: var(--navy);
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      padding: 0.9375rem;
+      cursor: pointer;
+      margin-top: 0.5rem;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    .form-submit:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .form-note {
+      margin-top: 0.875rem;
+      font-size: 0.75rem;
+      color: var(--slate);
+      text-align: center;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    footer .logo { font-size: 1rem; }
+
+    footer p {
+      font-size: 0.75rem;
+      color: var(--slate);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      section { padding: 3.5rem 1.25rem; }
+      .hero { padding: 3.5rem 1.25rem 2rem; }
+      .ticker-wrap { padding: 0 1.25rem; }
+      .price-card { padding: 2rem 1.5rem; }
+      .layer { grid-template-columns: 1fr; gap: 0.75rem; }
+      .layer-badge { width: 28px; height: 28px; font-size: 0.65rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Data<span>Bridge</span></div>
+  <a class="cta-nav" href="#get-started">Get started — $1,500</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="eyebrow">Ops Intelligence for Outsourced Teams</span>
+  <h1>Your team's data,<br /><em>working for you</em></h1>
+  <p class="hero-sub">
+    DataBridge turns your outsourced team's spreadsheet data into automated daily reports, executive summaries, and on-demand operational answers — built and delivered in two weeks, no calls required.
+  </p>
+  <a class="hero-cta" href="#get-started">Get started — $1,500 USD</a>
+  <p class="hero-meta">One-time build · 2-week delivery · async, no meetings</p>
+</div>
+
+<!-- SIGNAL TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-label">
+    <div class="ticker-dot"></div>
+    #ops-reporting · live signal feed
+  </div>
+  <div class="ticker-box">
+    <div class="ticker-feed" id="ticker">
+
+      <div class="ticker-row">
+        <span class="t-time">08:01</span>
+        <span class="t-channel">#ops-daily</span>
+        <span class="t-msg"><strong>Regulatory Translation</strong> — <span class="hi">142 pages processed</span>, 38 remaining · avg <strong>3.8 min/page</strong> · 6 active</span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">08:01</span>
+        <span class="t-channel">#ops-daily</span>
+        <span class="t-msg"><strong>Change-Compare</strong> — <span class="hi">29 docs completed</span>, 11 in queue · on track for EOD target</span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">08:01</span>
+        <span class="t-channel">#ops-daily</span>
+        <span class="t-msg"><strong>FOIA/ATI</strong> — 14 requests submitted today · 6 responses received · <span class="hi">3 ready for extraction</span></span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">08:02</span>
+        <span class="t-channel">#ops-daily</span>
+        <span class="t-msg"><strong>Team headcount</strong> — 19 of 22 active · 2 on leave · 1 training · <strong>error rate this week: 1.2%</strong></span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">14:00</span>
+        <span class="t-channel">#ops-mid</span>
+        <span class="t-msg"><strong>Surge alert</strong> — <span class="hi">load increase detected on Workflow B</span> · reallocation model suggests moving 3 from Translation · confidence 87%</span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">14:01</span>
+        <span class="t-channel">#ops-mid</span>
+        <span class="t-msg"><strong>AI tool usage</strong> — 2,840 credits used today · document type breakdown: 61% regulatory, 39% quality · within budget</span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">17:55</span>
+        <span class="t-channel">#ops-eod</span>
+        <span class="t-msg"><strong>EOD Summary</strong> — <span class="hi">318 units processed</span> across 4 workflows · daily target: 290 · <strong>+9.7% above plan</strong></span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">17:55</span>
+        <span class="t-channel">#ops-eod</span>
+        <span class="t-msg"><strong>Quality</strong> — 0 escalations today · weekly error rate 1.1% vs 1.45% baseline · throughput trend: ↑ week 3 of 4</span>
+      </div>
+
+      <!-- duplicate for seamless loop -->
+      <div class="ticker-row">
+        <span class="t-time">08:01</span>
+        <span class="t-channel">#ops-daily</span>
+        <span class="t-msg"><strong>Regulatory Translation</strong> — <span class="hi">142 pages processed</span>, 38 remaining · avg <strong>3.8 min/page</strong> · 6 active</span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">08:01</span>
+        <span class="t-channel">#ops-daily</span>
+        <span class="t-msg"><strong>Change-Compare</strong> — <span class="hi">29 docs completed</span>, 11 in queue · on track for EOD target</span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">08:01</span>
+        <span class="t-channel">#ops-daily</span>
+        <span class="t-msg"><strong>FOIA/ATI</strong> — 14 requests submitted today · 6 responses received · <span class="hi">3 ready for extraction</span></span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">08:02</span>
+        <span class="t-channel">#ops-daily</span>
+        <span class="t-msg"><strong>Team headcount</strong> — 19 of 22 active · 2 on leave · 1 training · <strong>error rate this week: 1.2%</strong></span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">14:00</span>
+        <span class="t-channel">#ops-mid</span>
+        <span class="t-msg"><strong>Surge alert</strong> — <span class="hi">load increase detected on Workflow B</span> · reallocation model suggests moving 3 from Translation · confidence 87%</span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">14:01</span>
+        <span class="t-channel">#ops-mid</span>
+        <span class="t-msg"><strong>AI tool usage</strong> — 2,840 credits used today · document type breakdown: 61% regulatory, 39% quality · within budget</span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">17:55</span>
+        <span class="t-channel">#ops-eod</span>
+        <span class="t-msg"><strong>EOD Summary</strong> — <span class="hi">318 units processed</span> across 4 workflows · daily target: 290 · <strong>+9.7% above plan</strong></span>
+      </div>
+
+      <div class="ticker-row">
+        <span class="t-time">17:55</span>
+        <span class="t-channel">#ops-eod</span>
+        <span class="t-msg"><strong>Quality</strong> — 0 escalations today · weekly error rate 1.1% vs 1.45% baseline · throughput trend: ↑ week 3 of 4</span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- PAIN -->
+<section class="pain">
+  <div class="inner">
+    <h2>Stop assembling data.<br /><em>Start making decisions.</em></h2>
+    <p class="section-body">You're accountable upward for a team that isn't in the same room. Every exec presentation, every resource call, every budget conversation needs data you have to request — then wait for someone else to pull.</p>
+
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="pain-icon">⏳</div>
+        <h3>Daily reports built by hand</h3>
+        <p>Your ops manager compiles and posts productivity data to Slack manually. Every day. Time that should be spent on decisions is spent on assembly.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">📊</div>
+        <h3>Monthly scramble before exec calls</h3>
+        <p>Quarterly reporting means 1–2 weeks of back-and-forth pulling data from multiple sheets. You're assembling the story instead of telling it.</p>
+      </div>
+      <div class="pain-item">
+        <div class="pain-icon">🔍</div>
+        <h3>Ad-hoc questions take days</h3>
+        <p>"What does reallocation look like if load surges on workflow B?" That question shouldn't take a week to answer. But right now, it does.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="layers">
+  <div class="inner">
+    <h2>Three things your team's data<br /><em>should already be doing</em></h2>
+    <p class="section-body">No new tools for your team to learn. DataBridge reads from your existing Google Sheets or Excel files and turns that data into intelligence you can actually act on.</p>
+
+    <div class="layer-stack">
+      <div class="layer">
+        <div class="layer-badge">L1</div>
+        <div>
+          <h3>Automated daily &amp; shift reporting</h3>
+          <p>Structured productivity reports generated and pushed to Slack or email automatically — at the start of each shift, mid-day, and end of day. Volume processed, remaining work, headcount, speed per unit, workflow-specific metrics. Configured for your exact team structure.</p>
+          <span class="layer-tag">Eliminates manual daily reporting</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-badge">L2</div>
+        <div>
+          <h3>Executive reporting automation</h3>
+          <p>Monthly and quarterly summaries auto-generated from the same data — formatted for your exec audience, delivered as slides or PDF on a scheduled trigger. No more end-of-month scramble. The report builds itself.</p>
+          <span class="layer-tag">Eliminates quarterly scramble</span>
+        </div>
+      </div>
+
+      <div class="layer">
+        <div class="layer-badge">L3</div>
+        <div>
+          <h3>On-demand operational intelligence</h3>
+          <p>Ask operational questions in plain language, get data-backed answers — without pulling data manually. "What does reallocation look like if I move 4 people from workflow A to B this week?" "How are AI tool credits tracking against document volume?" Answered in seconds, not days.</p>
+          <span class="layer-tag">The high-value layer</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="inner-wide">
+    <div class="inner" style="padding: 0;">
+      <p class="section-label">How it works</p>
+      <h2>From intake to live system<br />in two weeks</h2>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <span class="step-line"></span>
+        <div class="step-num">Fill the intake form</div>
+        <h3>You describe your team</h3>
+        <p>Workflows, metrics, data sources, reporting audience. One form, no calls. Payment processed on submission.</p>
+      </div>
+      <div class="step">
+        <span class="step-line"></span>
+        <div class="step-num">Data audit</div>
+        <h3>We map your data</h3>
+        <p>DataBridge reviews your Sheets or Excel structure and confirms metric fields and workflow configurations — async, within 48 hours.</p>
+      </div>
+      <div class="step">
+        <span class="step-line"></span>
+        <div class="step-num">Build</div>
+        <h3>System is configured</h3>
+        <p>Automation layer, reporting outputs, and intelligence interface built to your spec. No check-in calls. Progress shared via async update if needed.</p>
+      </div>
+      <div class="step">
+        <span class="step-line"></span>
+        <div class="step-num">Delivery &amp; handoff</div>
+        <h3>Live in your stack</h3>
+        <p>Loom walkthrough + Notion documentation portal. One round of async revisions included. Optional maintenance retainer offered at handoff.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DELIVERABLES -->
+<section class="deliverables">
+  <div class="inner">
+    <p class="section-label">What's included</p>
+    <h2>Everything you need.<br />Nothing you don't.</h2>
+
+    <div class="del-list">
+      <div class="del-item">
+        <span class="del-check">✦</span>
+        <span>Configured automation layer (n8n or Make) reading from your data source</span>
+      </div>
+      <div class="del-item">
+        <span class="del-check">✦</span>
+        <span>Slack integration or email delivery for daily/shift reports</span>
+      </div>
+      <div class="del-item">
+        <span class="del-check">✦</span>
+        <span>Executive reporting template, auto-populated on schedule</span>
+      </div>
+      <div class="del-item">
+        <span class="del-check">✦</span>
+        <span>AI-powered query interface for on-demand operational questions</span>
+      </div>
+      <div class="del-item">
+        <span class="del-check">✦</span>
+        <span>Notion client portal with full system documentation</span>
+      </div>
+      <div class="del-item">
+        <span class="del-check">✦</span>
+        <span>Loom walkthrough video covering the complete system</span>
+      </div>
+      <div class="del-item">
+        <span class="del-check">✦</span>
+        <span>One round of async revisions included</span>
+      </div>
+      <div class="del-item">
+        <span class="del-check">✦</span>
+        <span>Works with Google Sheets or Microsoft Excel — your choice</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICE -->
+<section class="price-section">
+  <div class="inner" style="text-align: center;">
+    <p class="section-label">Pricing</p>
+    <h2>One price. One scope.<br />No surprises.</h2>
+
+    <div class="price-card">
+      <div class="price-amount">$1,500</div>
+      <div class="price-label">USD · one-time build fee · delivered in 2 weeks</div>
+
+      <div class="price-includes">
+        <div class="pi-item"><span class="pi-check">✦</span> All three intelligence layers (L1, L2, L3)</div>
+        <div class="pi-item"><span class="pi-check">✦</span> Configured for your team's workflows and metrics</div>
+        <div class="pi-item"><span class="pi-check">✦</span> Full documentation and Loom walkthrough</div>
+        <div class="pi-item"><span class="pi-check">✦</span> One round of async revisions</div>
+        <div class="pi-item"><span class="pi-check">✦</span> Works with Google Sheets or Excel</div>
+        <div class="pi-item"><span class="pi-check">✦</span> No calls required at any stage</div>
+      </div>
+
+      <a class="hero-cta" href="#get-started" style="display: block; text-align: center;">Get started</a>
+
+      <div class="price-retainer">
+        After delivery: optional <strong>maintenance retainer from $300/month</strong> — monitoring, one config update/month, async support.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA / FORM -->
+<section class="cta-section" id="get-started">
+  <div class="inner">
+    <p class="section-label">Get started</p>
+    <h2>Tell us about your team</h2>
+    <p class="section-body">Fill out the form below. No calls, no back-and-forth — just the information we need to start building. Payment is processed after we confirm your setup is a fit.</p>
+
+    <div class="form-wrap">
+      <div class="form-group">
+        <label for="company">Company name</label>
+        <input type="text" id="company" name="company" placeholder="Acme Corp" />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Your work email</label>
+        <input type="email" id="email" name="email" placeholder="you@company.com" />
+      </div>
+
+      <div class="form-group">
+        <label for="team-size">Outsourced team size</label>
+        <select id="team-size" name="team-size">
+          <option value="" disabled selected>Select range</option>
+          <option>1–10 people</option>
+          <option>11–25 people</option>
+          <option>26–50 people</option>
+          <option>50+ people</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="data-source">Where does your team's data live?</label>
+        <select id="data-source" name="data-source">
+          <option value="" disabled selected>Select one</option>
+          <option>Google Sheets</option>
+          <option>Microsoft Excel</option>
+          <option>Both</option>
+          <option>Other (describe below)</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="pain">What's your biggest reporting or visibility pain right now?</label>
+        <textarea id="pain" name="pain" placeholder="e.g. Monthly exec reporting takes me 2 weeks to pull together. I have no way to quickly answer 'what does reallocation look like if load surges on one workflow?'"></textarea>
+      </div>
+
+      <button class="form-submit" type="button">Submit intake — we'll be in touch within 24 hours</button>
+      <p class="form-note">No payment yet. We'll confirm your setup is a fit before sending a payment link. No spam, no calls.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">Data<span>Bridge</span></div>
+  <p>© 2026 DataBridge · hello@databridgeops.com</p>
+</footer>
+
+</body>
+</html>
