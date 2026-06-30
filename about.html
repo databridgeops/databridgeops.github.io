@@ -175,7 +175,9 @@
       mask-image: radial-gradient(ellipse 70% 80% at 20% 50%, black 20%, transparent 100%);
     }
 
-    .hero-inner { position: relative; z-index: 2; max-width: 720px; }
+    .hero-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; text-align: center; }
+    .hero-answer { align-items: stretch; }
+    .answer-line { text-align: left; }
 
     /* The question — signature typographic treatment */
     .hero-question {
@@ -292,13 +294,16 @@
     /* ── STACK SECTION ── */
     .stack-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1px;
       background: rgba(255,255,255,0.06);
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 14px;
       overflow: hidden;
       margin-top: 3rem;
+    }
+    @media (max-width: 560px) {
+      .stack-grid { grid-template-columns: 1fr; }
     }
 
     .stack-item {
@@ -785,5 +790,9 @@
   });
 </script>
 
+<script src="content.js"></script>
+<script>
+  if (typeof applyContent === 'function') applyContent('about');
+</script>
 </body>
 </html>

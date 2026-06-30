@@ -802,6 +802,34 @@
     }
     .price-retainer strong { color: var(--text-dim); }
 
+    /* ── AUDIT OFFER STRIP ── */
+    .audit-offer {
+      max-width: 480px; margin: 1.5rem auto 0;
+    }
+    .audit-offer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; flex-wrap: wrap;
+      background: rgba(0,194,168,0.06);
+      border: 1px solid rgba(0,194,168,0.15);
+      border-radius: 10px; padding: 1rem 1.25rem;
+    }
+    .audit-offer-left { display: flex; flex-direction: column; gap: 0.2rem; }
+    .audit-label { font-size: 0.75rem; color: var(--slate); }
+    .audit-link {
+      font-size: 0.875rem; font-weight: 500;
+      color: var(--teal); text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .audit-link:hover { opacity: 0.75; }
+    .audit-offer-right {
+      font-size: 0.72rem; color: var(--slate);
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+    @media (max-width: 500px) {
+      .audit-offer-right { display: none; }
+    }
+
     /* ── CTA SECTION ── */
     .cta-section {
       position: relative;
@@ -937,10 +965,10 @@
       DataBridge turns your outsourced team's spreadsheet data into automated daily reports, executive summaries, and on-demand operational answers — built and delivered in two weeks, no calls required.
     </p>
     <div class="hero-cta-group">
-      <a class="btn-primary" href="#get-started">Get started — $1,500 USD</a>
+      <a class="btn-primary" href="#get-started">Get a free ops audit</a>
       <a class="btn-ghost" href="#layers">See how it works →</a>
     </div>
-    <p class="hero-meta">One-time build · 2-week delivery · async, no meetings</p>
+    <p class="hero-meta">No payment yet · Answer 5 questions · We respond within 24 hours</p>
   </div>
 
   <!-- Signal Ticker -->
@@ -1297,7 +1325,17 @@
   <div class="inner">
     <p class="section-label reveal">Get started</p>
     <h2 class="reveal reveal-delay-1">Tell us about your team</h2>
-    <p class="section-body reveal reveal-delay-2" style="margin:0 auto;">Fill out the form below. No calls, no back-and-forth — just the information we need to confirm your setup is a fit and start building. We'll respond within 24 hours.</p>
+    <p class="section-body reveal reveal-delay-2" style="margin:0 auto;">Answer a few questions about your setup. No payment yet — we confirm your situation is a fit before anything else. If you want more detail first, request a free ops audit instead.</p>
+
+    <div class="audit-offer reveal reveal-delay-2">
+      <div class="audit-offer-inner">
+        <div class="audit-offer-left">
+          <span class="audit-label">Not sure if DataBridge fits?</span>
+          <a href="#get-started" class="audit-link">Request a free ops audit →</a>
+        </div>
+        <div class="audit-offer-right">2–3 day async report · no cost · no call</div>
+      </div>
+    </div>
 
     <div class="form-wrap reveal reveal-delay-3">
       <div class="form-group">
@@ -1378,5 +1416,10 @@
   }, { passive: true });
 </script>
 
+<script src="content.js"></script>
+<script>
+  // Apply content layer to landing page
+  if (typeof applyContent === 'function') applyContent('index');
+</script>
 </body>
 </html>
