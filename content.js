@@ -35,7 +35,7 @@ const DATABRIDGE_CONTENT = {
     nav_layers:         "What You Get",
     nav_pricing:        "Pricing",
     nav_about:          "About",
-    nav_cta:            "Get started, $1,500",
+    nav_cta:            "Get started at $1,500",
 
     // Footer
     footer_terms:       "Terms",
