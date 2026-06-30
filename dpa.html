@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Data Processing Agreement — DataBridge Ops</title>
+  <title>Data Processing Agreement: DataBridge Ops</title>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
@@ -180,7 +180,7 @@
     <li><a href="index.html#layers">What You Get</a></li>
     <li><a href="index.html#pricing">Pricing</a></li>
     <li><a href="about.html">About</a></li>
-    <li><a href="index.html#get-started" class="nav-cta">Get started — $1,500</a></li>
+    <li><a href="index.html#get-started" class="nav-cta">Get started, $1,500</a></li>
   </ul>
 </nav>
 
@@ -188,7 +188,7 @@
 
   <div class="page-meta">
     <span class="meta-tag">Legal</span>
-    <span class="meta-date">Version 1.0 — June 29, 2026</span>
+    <span class="meta-date">Version 1.0, June 29, 2026</span>
   </div>
 
   <h1>Data Processing Agreement</h1>
@@ -226,7 +226,7 @@
   <div class="section" id="d1">
     <span class="section-num">Section 01</span>
     <h2>Nature of Processing</h2>
-    <p>DataBridge Ops accesses Client data for the following purposes only: reading operational metrics from specified Google Sheets or Excel files to configure and test the automation system; passing operational data through the n8n automation layer to generate reports and query responses; transmitting report outputs to the Client's specified Slack workspace or email address; and processing plain-language queries through the Claude API to generate L3 intelligence responses.</p>
+    <p>DataBridge Ops accesses Client data for the following purposes only: reading operational metrics from specified Google Sheets or Excel files to configure and test the automation system; passing operational data through the n8n automation layer to generate reports and query responses; transmitting report outputs to the Client's specified Slack, Microsoft Teams, or Google Chat workspace, or email address; and processing plain-language queries through the Claude API to generate L3 intelligence responses.</p>
     <div class="highlight-box"><strong>DataBridge Ops does not process personal data of the Client's end customers.</strong> The data processed consists of operational metrics: workflow volumes, headcount figures, processing speeds, error rates, and similar operational indicators.</div>
   </div>
 
@@ -282,27 +282,37 @@
       <tbody>
         <tr>
           <td>n8n (self-hosted)</td>
-          <td>Automation layer — no third-party data access</td>
+          <td>Automation layer, no third-party data access</td>
           <td>Client's or DataBridge Ops' VPS</td>
         </tr>
         <tr>
           <td>Anthropic (Claude API)</td>
-          <td>L3 query processing — query inputs only</td>
+          <td>L3 query processing, query inputs only</td>
           <td>United States</td>
         </tr>
         <tr>
           <td>Google LLC (Sheets API)</td>
-          <td>Data source access — read-only</td>
+          <td>Data source access, read-only</td>
           <td>United States</td>
         </tr>
         <tr>
           <td>Salesforce (Slack API)</td>
-          <td>Report delivery to Client's workspace</td>
+          <td>Report delivery to Client's workspace. Used if Client selects Slack.</td>
+          <td>United States</td>
+        </tr>
+        <tr>
+          <td>Microsoft (Teams API)</td>
+          <td>Report delivery to Client's workspace. Used if Client selects Teams.</td>
+          <td>United States</td>
+        </tr>
+        <tr>
+          <td>Google LLC (Chat API)</td>
+          <td>Report delivery to Client's workspace. Used if Client selects Google Chat.</td>
           <td>United States</td>
         </tr>
         <tr>
           <td>VPS Provider</td>
-          <td>Infrastructure hosting — disclosed at build start</td>
+          <td>Infrastructure hosting, disclosed at build start</td>
           <td>Varies by provider</td>
         </tr>
       </tbody>
@@ -324,7 +334,7 @@
       <tbody>
         <tr>
           <td>Client operational data</td>
-          <td><span class="hi">Not stored</span> — processed in real time only</td>
+          <td><span class="hi">Not stored</span>, processed in real time only</td>
           <td>Never copied to DataBridge Ops storage</td>
         </tr>
         <tr>
@@ -386,7 +396,7 @@
   <div class="section" id="d8">
     <span class="section-num">Section 08</span>
     <h2>International Data Transfers</h2>
-    <p>DataBridge Ops is based in the Philippines. Anthropic, Google, and Slack process data in the United States. By proceeding with the build, Client acknowledges these transfers and confirms they have assessed the transfer mechanisms applicable to their situation.</p>
+    <p>DataBridge Ops is based in the Philippines. Anthropic, Google, Microsoft, and Salesforce (Slack) process data in the United States. By proceeding with the build, Client acknowledges these transfers and confirms they have assessed the transfer mechanisms applicable to their situation.</p>
     <p>For UK and EU Clients: DataBridge Ops relies on the legitimate interest basis for B2B processing and will execute Standard Contractual Clauses (SCCs) upon Client request.</p>
   </div>
 
