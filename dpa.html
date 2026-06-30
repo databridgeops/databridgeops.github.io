@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Data Processing Agreement — DataBridge Ops</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -30,6 +34,16 @@
     }
     .logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--off-white); text-decoration: none; }
     .logo span { color: var(--teal); }
+    .logo-ops {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--slate);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
     .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
     .nav-links a { font-size: 0.875rem; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
     .nav-links a:hover { color: var(--off-white); }
@@ -160,7 +174,7 @@
 <body>
 
 <nav>
-  <a href="index.html" class="logo">Data<span>Bridge</span></a>
+  <a href="index.html" class="logo">Data<span>Bridge</span><span class="logo-ops">Ops</span></a>
   <ul class="nav-links">
     <li><a href="index.html#problem">The Problem</a></li>
     <li><a href="index.html#layers">What You Get</a></li>
@@ -184,7 +198,7 @@
     <div class="party-card">
       <span class="party-role">Data Controller</span>
       <div class="party-name">The Client</div>
-      <div class="party-desc">The company or individual purchasing the DataBridge build.</div>
+      <div class="party-desc">The company or individual purchasing the DataBridge Ops build.</div>
     </div>
     <div class="party-card">
       <span class="party-role">Data Processor</span>
@@ -212,8 +226,8 @@
   <div class="section" id="d1">
     <span class="section-num">Section 01</span>
     <h2>Nature of Processing</h2>
-    <p>DataBridge accesses Client data for the following purposes only: reading operational metrics from specified Google Sheets or Excel files to configure and test the automation system; passing operational data through the n8n automation layer to generate reports and query responses; transmitting report outputs to the Client's specified Slack workspace or email address; and processing plain-language queries through the Claude API to generate L3 intelligence responses.</p>
-    <div class="highlight-box"><strong>DataBridge does not process personal data of the Client's end customers.</strong> The data processed consists of operational metrics: workflow volumes, headcount figures, processing speeds, error rates, and similar operational indicators.</div>
+    <p>DataBridge Ops accesses Client data for the following purposes only: reading operational metrics from specified Google Sheets or Excel files to configure and test the automation system; passing operational data through the n8n automation layer to generate reports and query responses; transmitting report outputs to the Client's specified Slack workspace or email address; and processing plain-language queries through the Claude API to generate L3 intelligence responses.</p>
+    <div class="highlight-box"><strong>DataBridge Ops does not process personal data of the Client's end customers.</strong> The data processed consists of operational metrics: workflow volumes, headcount figures, processing speeds, error rates, and similar operational indicators.</div>
   </div>
 
   <div class="section" id="d2">
@@ -250,13 +264,13 @@
         </tr>
       </tbody>
     </table>
-    <div class="warning-box"><strong>Note on named individuals:</strong> If Client's source files contain named individuals alongside productivity metrics, DataBridge processes this only as necessary to configure the System. DataBridge recommends anonymising individual-level data where possible. If named individuals are EU residents, GDPR applies and Client is responsible for ensuring appropriate lawful basis for sharing this data with DataBridge.</div>
+    <div class="warning-box"><strong>Note on named individuals:</strong> If Client's source files contain named individuals alongside productivity metrics, DataBridge Ops processes this only as necessary to configure the System. DataBridge Ops recommends anonymising individual-level data where possible. If named individuals are EU residents, GDPR applies and Client is responsible for ensuring appropriate lawful basis for sharing this data with DataBridge Ops.</div>
   </div>
 
   <div class="section" id="d3">
     <span class="section-num">Section 03</span>
     <h2>Sub-Processors</h2>
-    <p>DataBridge uses the following sub-processors. Client acknowledges and accepts their involvement by proceeding with the build.</p>
+    <p>DataBridge Ops uses the following sub-processors. Client acknowledges and accepts their involvement by proceeding with the build.</p>
     <table class="data-table">
       <thead>
         <tr>
@@ -269,7 +283,7 @@
         <tr>
           <td>n8n (self-hosted)</td>
           <td>Automation layer — no third-party data access</td>
-          <td>Client's or DataBridge's VPS</td>
+          <td>Client's or DataBridge Ops' VPS</td>
         </tr>
         <tr>
           <td>Anthropic (Claude API)</td>
@@ -293,7 +307,7 @@
         </tr>
       </tbody>
     </table>
-    <p style="margin-top:1rem;">DataBridge will notify Client of any new sub-processors added during the engagement, with a minimum of 14 days notice.</p>
+    <p style="margin-top:1rem;">DataBridge Ops will notify Client of any new sub-processors added during the engagement, with a minimum of 14 days notice.</p>
   </div>
 
   <div class="section" id="d4">
@@ -311,7 +325,7 @@
         <tr>
           <td>Client operational data</td>
           <td><span class="hi">Not stored</span> — processed in real time only</td>
-          <td>Never copied to DataBridge storage</td>
+          <td>Never copied to DataBridge Ops storage</td>
         </tr>
         <tr>
           <td>n8n workflow run logs</td>
@@ -320,7 +334,7 @@
         </tr>
         <tr>
           <td>Claude API query inputs</td>
-          <td>Not stored by DataBridge</td>
+          <td>Not stored by DataBridge Ops</td>
           <td>Anthropic's retention policy applies</td>
         </tr>
         <tr>
@@ -340,19 +354,19 @@
         </tr>
         <tr>
           <td>Payment information</td>
-          <td><span class="hi">Not stored by DataBridge</span></td>
+          <td><span class="hi">Not stored by DataBridge Ops</span></td>
           <td>Handled entirely by Stripe</td>
         </tr>
       </tbody>
     </table>
-    <p>DataBridge will process verified deletion requests within 10 business days.</p>
+    <p>DataBridge Ops will process verified deletion requests within 10 business days.</p>
   </div>
 
   <div class="section" id="d5">
     <span class="section-num">Section 05</span>
     <h2>Security Measures</h2>
     <p><strong>Technical measures applied to every build:</strong></p>
-    <p>Read-only API access to Client data sources by default · HTTPS-only access to all DataBridge-managed infrastructure · Authentication required on all n8n instances · API credentials and webhook URLs stored as environment variables, never hardcoded · VPS OS security patches applied regularly · Workflow run logs purged after 30 days.</p>
+    <p>Read-only API access to Client data sources by default · HTTPS-only access to all DataBridge Ops-managed infrastructure · Authentication required on all n8n instances · API credentials and webhook URLs stored as environment variables, never hardcoded · VPS OS security patches applied regularly · Workflow run logs purged after 30 days.</p>
     <p style="margin-top:1rem;"><strong>Organisational measures:</strong></p>
     <p>Data access scoped to minimum required (data minimisation) · All data access documented in Client's Notion portal before build begins · Security checklist completed and stored per build · Access credentials revoked on engagement end under Options B and C.</p>
   </div>
@@ -360,26 +374,26 @@
   <div class="section" id="d6">
     <span class="section-num">Section 06</span>
     <h2>Data Breach Notification</h2>
-    <p>In the event DataBridge identifies or suspects a data breach affecting Client data, DataBridge will notify Client via email within <strong>24 hours</strong> of identification, provide a written incident summary covering the nature of the breach, data categories affected, likely consequences, and measures taken, and cooperate with Client in any required notifications to supervisory authorities or data subjects.</p>
+    <p>In the event DataBridge Ops identifies or suspects a data breach affecting Client data, DataBridge Ops will notify Client via email within <strong>24 hours</strong> of identification, provide a written incident summary covering the nature of the breach, data categories affected, likely consequences, and measures taken, and cooperate with Client in any required notifications to supervisory authorities or data subjects.</p>
   </div>
 
   <div class="section" id="d7">
     <span class="section-num">Section 07</span>
     <h2>Client Obligations as Data Controller</h2>
-    <p>Client is responsible for ensuring they have lawful basis to share the data sources with DataBridge, informing DataBridge if any data source contains personal data of EU residents, California residents, or other specially protected categories, notifying DataBridge immediately if they become aware of any security incident affecting systems connected to the DataBridge build, and ensuring their own use of the System's outputs complies with applicable law.</p>
+    <p>Client is responsible for ensuring they have lawful basis to share the data sources with DataBridge Ops, informing DataBridge Ops if any data source contains personal data of EU residents, California residents, or other specially protected categories, notifying DataBridge Ops immediately if they become aware of any security incident affecting systems connected to the DataBridge Ops build, and ensuring their own use of the System's outputs complies with applicable law.</p>
   </div>
 
   <div class="section" id="d8">
     <span class="section-num">Section 08</span>
     <h2>International Data Transfers</h2>
-    <p>DataBridge is based in the Philippines. Anthropic, Google, and Slack process data in the United States. By proceeding with the build, Client acknowledges these transfers and confirms they have assessed the transfer mechanisms applicable to their situation.</p>
-    <p>For UK and EU Clients: DataBridge relies on the legitimate interest basis for B2B processing and will execute Standard Contractual Clauses (SCCs) upon Client request.</p>
+    <p>DataBridge Ops is based in the Philippines. Anthropic, Google, and Slack process data in the United States. By proceeding with the build, Client acknowledges these transfers and confirms they have assessed the transfer mechanisms applicable to their situation.</p>
+    <p>For UK and EU Clients: DataBridge Ops relies on the legitimate interest basis for B2B processing and will execute Standard Contractual Clauses (SCCs) upon Client request.</p>
   </div>
 
   <div class="section" id="d9">
     <span class="section-num">Section 09</span>
     <h2>Audit Rights</h2>
-    <p>Client may request confirmation of DataBridge's compliance with this DPA by emailing build@databridgeops.com. DataBridge will respond within 10 business days with documentation of current security measures. On-site audits are not available given the remote nature of the engagement.</p>
+    <p>Client may request confirmation of DataBridge Ops' compliance with this DPA by emailing build@databridgeops.com. DataBridge Ops will respond within 10 business days with documentation of current security measures. On-site audits are not available given the remote nature of the engagement.</p>
   </div>
 
   <div class="section" id="d10">
@@ -398,7 +412,7 @@
 </div>
 
 <footer>
-  <a href="index.html" class="logo" style="text-decoration:none;">Data<span style="color:var(--teal)">Bridge</span></a>
+  <a href="index.html" class="logo" style="text-decoration:none;">Data<span style="color:var(--teal)">Bridge</span><span class="logo-ops">Ops</span></a>
   <p>© 2026 DataBridge Ops · <a href="terms.html">Terms</a> · <a href="dpa.html">DPA</a> · <a href="about.html">About</a></p>
 </footer>
 

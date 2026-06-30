@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About — DataBridge Ops</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -83,6 +87,16 @@
       text-decoration: none;
     }
     .logo span { color: var(--teal); }
+    .logo-ops {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: var(--slate);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-left: 0.4rem;
+      vertical-align: middle;
+    }
     .nav-links {
       display: flex; align-items: center; gap: 2rem; list-style: none;
     }
@@ -510,7 +524,7 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a href="index.html" class="logo">Data<span>Bridge</span></a>
+  <a href="index.html" class="logo">Data<span>Bridge</span><span class="logo-ops">Ops</span></a>
   <ul class="nav-links">
     <li><a href="index.html#problem">The Problem</a></li>
     <li><a href="index.html#layers">What You Get</a></li>
@@ -527,7 +541,7 @@
   <div class="hero-inner">
     <div class="hero-question reveal">// who builds a tool like this?</div>
     <h1 class="reveal delay-1">People who've done<br /><em>this work themselves.</em></h1>
-    <p class="lead reveal delay-2">DataBridge wasn't designed from a whiteboard. It was designed from inside a data operations team — managing offshore workflows, assembling manual reports, and commissioning data investigations for decisions that needed answers yesterday.</p>
+    <p class="lead reveal delay-2">DataBridge Ops wasn't designed from a whiteboard. It was designed from inside a data operations team — managing offshore workflows, assembling manual reports, and commissioning data investigations for decisions that needed answers yesterday.</p>
 
     <div class="hero-answer">
       <div class="answer-line reveal delay-2">
@@ -580,7 +594,7 @@
           <tr>
             <td class="log-year">2024–2025</td>
             <td class="log-context">FOIA/ATI request operations · multi-jurisdiction compliance tracking</td>
-            <td class="log-outcome">Request volume doubled (<span class="num">2×</span>) year-over-year. Managed entirely through manual coordination — the exact problem DataBridge's L1 layer was designed to solve.</td>
+            <td class="log-outcome">Request volume doubled (<span class="num">2×</span>) year-over-year. Managed entirely through manual coordination — the exact problem DataBridge Ops' L1 layer was designed to solve.</td>
           </tr>
           <tr>
             <td class="log-year">2025</td>
@@ -595,7 +609,7 @@
           <tr>
             <td class="log-year">Ongoing</td>
             <td class="log-context">Multi-industry ops delivery · no playbooks, variable contexts</td>
-            <td class="log-outcome">10+ years executing across BPO, life sciences, regulatory compliance, project delivery. Built frameworks from scratch repeatedly. DataBridge is what we wished existed.</td>
+            <td class="log-outcome">10+ years executing across BPO, life sciences, regulatory compliance, project delivery. Built frameworks from scratch repeatedly. DataBridge Ops is what we wished existed.</td>
           </tr>
         </tbody>
       </table>
@@ -610,7 +624,7 @@
   <div class="inner">
     <span class="eyebrow reveal">How we build</span>
     <h2 class="reveal delay-1">A lean, deliberate stack.<br /><em>No black boxes.</em></h2>
-    <p class="body-text reveal delay-2">Every DataBridge system is built on the same four components — chosen because they're open, auditable, and don't require your data to pass through systems you didn't choose.</p>
+    <p class="body-text reveal delay-2">Every DataBridge Ops system is built on the same four components — chosen because they're open, auditable, and don't require your data to pass through systems you didn't choose.</p>
 
     <div class="stack-grid">
       <div class="stack-item reveal delay-1">
@@ -645,7 +659,7 @@
     <div class="inner" style="padding:0; margin-bottom:0;">
       <span class="eyebrow reveal">Data privacy</span>
       <h2 class="reveal delay-1">Your data stays yours.<br /><em>No exceptions.</em></h2>
-      <p class="body-text reveal delay-2">We've worked in environments where data handling is a regulated obligation — not a checkbox. That shapes how we build DataBridge systems.</p>
+      <p class="body-text reveal delay-2">We've worked in environments where data handling is a regulated obligation — not a checkbox. That shapes how we build DataBridge Ops systems.</p>
     </div>
 
     <div class="privacy-grid">
@@ -653,7 +667,7 @@
         <div class="principle-item reveal delay-1">
           <div class="principle-label">Principle 01</div>
           <div class="principle-title">We read. We don't store.</div>
-          <div class="principle-desc">DataBridge reads your operational data on trigger to generate reports and answers. We don't copy it to any DataBridge-owned database. It passes through the automation layer and goes to its destination. That's it.</div>
+          <div class="principle-desc">DataBridge Ops reads your operational data on trigger to generate reports and answers. We don't copy it to any DataBridge Ops-owned database. It passes through the automation layer and goes to its destination. That's it.</div>
         </div>
         <div class="principle-item reveal delay-2">
           <div class="principle-label">Principle 02</div>
@@ -663,12 +677,12 @@
         <div class="principle-item reveal delay-3">
           <div class="principle-label">Principle 03</div>
           <div class="principle-title">You can revoke access at any time.</div>
-          <div class="principle-desc">Your Notion portal includes step-by-step instructions for disconnecting DataBridge's access to your data sources. You don't need to ask us. You're in control.</div>
+          <div class="principle-desc">Your Notion portal includes step-by-step instructions for disconnecting DataBridge Ops' access to your data sources. You don't need to ask us. You're in control.</div>
         </div>
         <div class="principle-item reveal delay-4">
           <div class="principle-label">Principle 04</div>
           <div class="principle-title">No AI training on your data.</div>
-          <div class="principle-desc">Your operational data is not used to improve DataBridge products, train AI models, or inform any other client's system. What's yours stays yours.</div>
+          <div class="principle-desc">Your operational data is not used to improve DataBridge Ops products, train AI models, or inform any other client's system. What's yours stays yours.</div>
         </div>
       </div>
 
@@ -755,7 +769,7 @@
 <section class="cta-strip">
   <span class="eyebrow reveal">Ready to see it in action?</span>
   <h2 class="reveal delay-1">Start with a free ops audit.<br /><em>No commitment required.</em></h2>
-  <p class="reveal delay-2">Submit the survey, describe your team's situation, and we'll deliver a structured async report — what we see, what it means, and what DataBridge would build for you. Yours to keep regardless of next steps.</p>
+  <p class="reveal delay-2">Submit the survey, describe your team's situation, and we'll deliver a structured async report — what we see, what it means, and what DataBridge Ops would build for you. Yours to keep regardless of next steps.</p>
   <div class="cta-group reveal delay-3">
     <a href="index.html#get-started" class="btn-primary">Request a free audit</a>
     <a href="index.html#layers" class="btn-ghost">See the product →</a>
@@ -764,7 +778,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <a href="index.html" class="logo" style="text-decoration:none;">Data<span style="color:var(--teal)">Bridge</span></a>
+  <a href="index.html" class="logo" style="text-decoration:none;">Data<span style="color:var(--teal)">Bridge</span><span class="logo-ops">Ops</span></a>
   <p>© 2026 DataBridge Ops · build@databridgeops.com · <a href="terms.html" style="color:var(--slate); text-decoration:none;">Terms</a> · <a href="dpa.html" style="color:var(--slate); text-decoration:none;">DPA</a></p>
 </footer>
 

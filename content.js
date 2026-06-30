@@ -23,7 +23,7 @@ const DATABRIDGE_CONTENT = {
   // GLOBAL — shared across all pages
   // ─────────────────────────────────────────────
   global: {
-    brand:              "DataBridge",
+    brand:              "DataBridge Ops",
     brand_suffix:       "Ops",
     email:              "build@databridgeops.com",
     domain:             "databridgeops.com",
@@ -52,7 +52,7 @@ const DATABRIDGE_CONTENT = {
     hero_eyebrow:       "Ops Intelligence for Outsourced Teams",
     hero_h1_line1:      "Your team's data,",
     hero_h1_line2:      "working for you",           // rendered in teal italic
-    hero_sub:           "DataBridge turns your outsourced team's spreadsheet data into automated daily reports, executive summaries, and on-demand operational answers — built and delivered in two weeks, no calls required.",
+    hero_sub:           "DataBridge Ops turns your outsourced team's spreadsheet data into automated daily reports, executive summaries, and on-demand operational answers — built and delivered in two weeks, no calls required.",
     hero_cta_primary:   "Get a free ops audit",
     hero_cta_secondary: "See how it works →",
     hero_meta:          "No payment yet · Answer 5 questions · We respond within 24 hours",
@@ -76,10 +76,10 @@ const DATABRIDGE_CONTENT = {
     pain_3_body:        '"What does reallocation look like if load surges on workflow B?" That question shouldn\'t take a week to answer. But right now, it does.',
 
     // Layers section
-    layers_eyebrow:     "What DataBridge delivers",
+    layers_eyebrow:     "What DataBridge Ops delivers",
     layers_h2_line1:    "Three things your team's data",
     layers_h2_line2:    "should already be doing",   // teal italic
-    layers_body:        "No new tools for your team to learn. DataBridge reads from your existing Google Sheets or Excel files and turns that data into intelligence you can act on.",
+    layers_body:        "No new tools for your team to learn. DataBridge Ops reads from your existing Google Sheets or Excel files and turns that data into intelligence you can act on.",
 
     l1_badge:           "L1",
     l1_title:           "Automated daily & shift reporting",
@@ -152,7 +152,7 @@ const DATABRIDGE_CONTENT = {
     cta_h2:             "Tell us about your team",
     cta_body:           "Answer a few questions about your setup. No payment yet — we confirm your situation is a fit before anything else. If you want more detail first, request a free ops audit instead.",
 
-    cta_audit_label:    "Not sure if DataBridge fits?",
+    cta_audit_label:    "Not sure if DataBridge Ops fits?",
     cta_audit_link:     "Request a free ops audit →",
     cta_audit_sub:      "2–3 day async report, no cost, no call.",
 
@@ -185,7 +185,7 @@ const DATABRIDGE_CONTENT = {
     hero_question:      "// who builds a tool like this?",
     hero_h1_line1:      "People who've done",
     hero_h1_line2:      "this work themselves.", // teal italic
-    hero_sub:           "DataBridge wasn't designed from a whiteboard. It was designed from inside a data operations team — managing offshore workflows, assembling manual reports, and commissioning data investigations for decisions that needed answers yesterday.",
+    hero_sub:           "DataBridge Ops wasn't designed from a whiteboard. It was designed from inside a data operations team — managing offshore workflows, assembling manual reports, and commissioning data investigations for decisions that needed answers yesterday.",
 
     cred_1_title:       "Operators, not consultants.",
     cred_1_body:        "We've run the kind of teams our clients outsource — accountable for output, not just observing it.",
@@ -205,7 +205,7 @@ const DATABRIDGE_CONTENT = {
     stack_eyebrow:      "How we build",
     stack_h2_line1:     "A lean, deliberate stack.",
     stack_h2_line2:     "No black boxes.",           // teal italic
-    stack_body:         "Every DataBridge system is built on the same four components — chosen because they're open, auditable, and don't require your data to pass through systems you didn't choose.",
+    stack_body:         "Every DataBridge Ops system is built on the same four components — chosen because they're open, auditable, and don't require your data to pass through systems you didn't choose.",
 
     stack_1_name:       "n8n",
     stack_1_role:       "Automation layer",
@@ -227,11 +227,11 @@ const DATABRIDGE_CONTENT = {
     privacy_eyebrow:    "Data privacy",
     privacy_h2_line1:   "Your data stays yours.",
     privacy_h2_line2:   "No exceptions.",            // teal italic
-    privacy_body:       "We've worked in environments where data handling is a regulated obligation — not a checkbox. That shapes how we build DataBridge systems.",
+    privacy_body:       "We've worked in environments where data handling is a regulated obligation — not a checkbox. That shapes how we build DataBridge Ops systems.",
 
     p1_label:           "Principle 01",
     p1_title:           "We read. We don't store.",
-    p1_body:            "DataBridge reads your operational data on trigger to generate reports and answers. We don't copy it to any DataBridge-owned database. It passes through the automation layer and goes to its destination. That's it.",
+    p1_body:            "DataBridge Ops reads your operational data on trigger to generate reports and answers. We don't copy it to any DataBridge Ops-owned database. It passes through the automation layer and goes to its destination. That's it.",
 
     p2_label:           "Principle 02",
     p2_title:           "Read-only by default.",
@@ -239,11 +239,11 @@ const DATABRIDGE_CONTENT = {
 
     p3_label:           "Principle 03",
     p3_title:           "You can revoke access at any time.",
-    p3_body:            "Your Notion portal includes step-by-step instructions for disconnecting DataBridge's access to your data sources. You don't need to ask us. You're in control.",
+    p3_body:            "Your Notion portal includes step-by-step instructions for disconnecting DataBridge Ops' access to your data sources. You don't need to ask us. You're in control.",
 
     p4_label:           "Principle 04",
     p4_title:           "No AI training on your data.",
-    p4_body:            "Your operational data is not used to improve DataBridge products, train AI models, or inform any other client's system. What's yours stays yours.",
+    p4_body:            "Your operational data is not used to improve DataBridge Ops products, train AI models, or inform any other client's system. What's yours stays yours.",
 
     // How we work
     how_eyebrow:        "How we work",
@@ -267,7 +267,7 @@ const DATABRIDGE_CONTENT = {
     cta_eyebrow:        "Ready to see it in action?",
     cta_h2_line1:       "Start with a free ops audit.",
     cta_h2_line2:       "No commitment required.",   // teal italic
-    cta_body:           "Submit the survey, describe your team's situation, and we'll deliver a structured async report — what we see, what it means, and what DataBridge would build for you. Yours to keep regardless of next steps.",
+    cta_body:           "Submit the survey, describe your team's situation, and we'll deliver a structured async report — what we see, what it means, and what DataBridge Ops would build for you. Yours to keep regardless of next steps.",
     cta_primary:        "Request a free audit",
     cta_secondary:      "See the product →",
   },
