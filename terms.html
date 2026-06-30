@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — DataBridge Ops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0F1F2E; --navy-mid: #1E3A4F;
+      --off-white: #F0F4F8; --teal: #00C2A8; --teal-dim: #007A6B;
+      --slate: #6B8FA8; --slate-light: #A8C0D0;
+      --text: #E8EFF5; --text-dim: #8AACC0;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--navy); color: var(--text);
+      font-family: 'Inter', sans-serif; font-size: 16px;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.25rem 2.5rem; position: fixed; top: 0; left: 0; right: 0;
+      z-index: 200; background: rgba(15,31,46,0.94);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .logo { font-family: 'DM Serif Display', serif; font-size: 1.25rem; color: var(--off-white); text-decoration: none; }
+    .logo span { color: var(--teal); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.875rem; color: var(--text-dim); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--off-white); }
+    .nav-cta { font-size: 0.875rem !important; font-weight: 500; color: var(--navy) !important; background: var(--teal); padding: 0.5rem 1.25rem; border-radius: 6px; }
+    @media (max-width: 680px) { .nav-links { display: none; } nav { padding: 1rem 1.25rem; } }
+
+    .page-wrap { max-width: 720px; margin: 0 auto; padding: 8rem 2.5rem 6rem; }
+
+    .page-meta {
+      display: flex; align-items: center; gap: 1rem;
+      margin-bottom: 2.5rem; flex-wrap: wrap;
+    }
+    .meta-tag {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+      color: var(--teal); letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 0.25rem 0.625rem; border-radius: 4px;
+      background: rgba(0,194,168,0.08); border: 1px solid rgba(0,194,168,0.15);
+    }
+    .meta-date { font-size: 0.8rem; color: var(--slate); }
+
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15; letter-spacing: -0.02em;
+      color: var(--off-white); margin-bottom: 0.75rem;
+    }
+
+    .page-intro {
+      font-size: 1rem; color: var(--text-dim);
+      line-height: 1.75; margin-bottom: 3rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .toc {
+      background: rgba(30,58,79,0.4);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 1.5rem 1.75rem;
+      margin-bottom: 3rem;
+    }
+    .toc-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.65rem;
+      color: var(--teal); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 1rem; display: block;
+    }
+    .toc ol { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .toc a {
+      font-size: 0.875rem; color: var(--text-dim); text-decoration: none;
+      transition: color 0.2s; display: flex; align-items: center; gap: 0.5rem;
+    }
+    .toc a:hover { color: var(--teal); }
+    .toc-num { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--slate); width: 20px; }
+
+    .section {
+      margin-bottom: 3rem; padding-bottom: 3rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .section:last-of-type { border-bottom: none; }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+      color: var(--teal); letter-spacing: 0.08em; margin-bottom: 0.625rem;
+      display: block;
+    }
+
+    h2 {
+      font-family: 'DM Serif Display', serif; font-size: 1.5rem;
+      color: var(--off-white); margin-bottom: 1.25rem; line-height: 1.25;
+    }
+
+    p { font-size: 0.9375rem; color: var(--text-dim); line-height: 1.78; margin-bottom: 1rem; }
+    p:last-child { margin-bottom: 0; }
+    p strong { color: var(--text); font-weight: 500; }
+
+    .option-block {
+      background: rgba(30,58,79,0.35); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1rem 0;
+    }
+    .option-label {
+      font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
+      color: var(--teal); letter-spacing: 0.06em; margin-bottom: 0.5rem; display: block;
+    }
+    .option-title { font-size: 0.9375rem; font-weight: 600; color: var(--off-white); margin-bottom: 0.375rem; }
+    .option-desc { font-size: 0.875rem; color: var(--text-dim); line-height: 1.65; }
+
+    .highlight-box {
+      background: rgba(0,194,168,0.06); border: 1px solid rgba(0,194,168,0.15);
+      border-radius: 10px; padding: 1.25rem 1.5rem; margin: 1.25rem 0;
+      font-size: 0.9rem; color: var(--text-dim); line-height: 1.7;
+    }
+    .highlight-box strong { color: var(--teal); }
+
+    .contact-block {
+      background: rgba(30,58,79,0.4); border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 12px; padding: 2rem; text-align: center; margin-top: 3rem;
+    }
+    .contact-block p { margin-bottom: 0.5rem; }
+    .contact-block a { color: var(--teal); text-decoration: none; }
+    .contact-block a:hover { text-decoration: underline; }
+
+    footer {
+      padding: 2rem 2.5rem; border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.75rem; color: var(--slate); }
+    footer a { color: var(--slate); text-decoration: none; }
+    footer a:hover { color: var(--teal); }
+
+    @media (max-width: 600px) {
+      .page-wrap { padding: 7rem 1.25rem 4rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">Data<span>Bridge</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#problem">The Problem</a></li>
+    <li><a href="index.html#layers">What You Get</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="index.html#get-started" class="nav-cta">Get started — $1,500</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+
+  <div class="page-meta">
+    <span class="meta-tag">Legal</span>
+    <span class="meta-date">Version 1.0 — June 29, 2026</span>
+  </div>
+
+  <h1>Terms of Service</h1>
+  <p class="page-intro">These Terms govern your use of DataBridge Ops services. Plain English throughout — no legalese where avoidable. By submitting an intake form and making payment, you agree to these Terms.</p>
+
+  <div class="toc">
+    <span class="toc-label">Contents</span>
+    <ol>
+      <li><a href="#s1"><span class="toc-num">01</span> What DataBridge Provides</a></li>
+      <li><a href="#s2"><span class="toc-num">02</span> What's Included in the Build Fee</a></li>
+      <li><a href="#s3"><span class="toc-num">03</span> Infrastructure Costs After Month 1</a></li>
+      <li><a href="#s4"><span class="toc-num">04</span> Delivery Timeline and Process</a></li>
+      <li><a href="#s5"><span class="toc-num">05</span> Data Access and Privacy</a></li>
+      <li><a href="#s6"><span class="toc-num">06</span> Client Responsibilities</a></li>
+      <li><a href="#s7"><span class="toc-num">07</span> Payment Terms</a></li>
+      <li><a href="#s8"><span class="toc-num">08</span> Intellectual Property</a></li>
+      <li><a href="#s9"><span class="toc-num">09</span> Limitation of Liability</a></li>
+      <li><a href="#s10"><span class="toc-num">10</span> Termination</a></li>
+      <li><a href="#s11"><span class="toc-num">11</span> Governing Law</a></li>
+      <li><a href="#s12"><span class="toc-num">12</span> Changes to These Terms</a></li>
+    </ol>
+  </div>
+
+  <div class="section" id="s1">
+    <span class="section-num">Section 01</span>
+    <h2>What DataBridge Provides</h2>
+    <p>DataBridge configures an automated ops intelligence system ("the System") built on your existing spreadsheet data. The System includes up to three layers as scoped during intake:</p>
+    <div class="option-block">
+      <span class="option-label">L1</span>
+      <div class="option-title">Automated daily/shift productivity reporting</div>
+      <div class="option-desc">Structured reports generated and pushed to Slack or email automatically at configured intervals.</div>
+    </div>
+    <div class="option-block">
+      <span class="option-label">L2</span>
+      <div class="option-title">Executive reporting automation</div>
+      <div class="option-desc">Monthly and quarterly summaries auto-generated on scheduled triggers, formatted for your exec audience.</div>
+    </div>
+    <div class="option-block">
+      <span class="option-label">L3</span>
+      <div class="option-title">On-demand operational intelligence</div>
+      <div class="option-desc">A plain-language query interface that answers operational questions from your team's data in real time.</div>
+    </div>
+    <p style="margin-top:1rem;">Exact scope is confirmed during the data audit phase (Days 1–3 of the build) and documented in your Notion client portal.</p>
+  </div>
+
+  <div class="section" id="s2">
+    <span class="section-num">Section 02</span>
+    <h2>What's Included in the Build Fee</h2>
+    <p>The one-time build fee of <strong>$1,500 USD</strong> includes:</p>
+    <p>All configuration and build work · First month of infrastructure hosting (~$5–7/month VPS cost absorbed) · Claude API costs for L3 queries during Month 1 (typically $2–5/month) · Full system documentation in a Notion client portal · One Loom walkthrough video · One round of async revisions.</p>
+  </div>
+
+  <div class="section" id="s3">
+    <span class="section-num">Section 03</span>
+    <h2>Infrastructure Costs After Month 1</h2>
+    <p>DataBridge systems run on infrastructure that has ongoing costs. These are disclosed before purchase. After Month 1, you choose one of three options:</p>
+    <div class="option-block">
+      <span class="option-label">Option A</span>
+      <div class="option-title">Maintenance Retainer — $300–500/month</div>
+      <div class="option-desc">DataBridge continues hosting and maintaining the system. Includes hosting, monitoring, one configuration update per month, and async support.</div>
+    </div>
+    <div class="option-block">
+      <span class="option-label">Option B</span>
+      <div class="option-title">Self-Hosted Transfer — ~$5–10/month, Client-managed</div>
+      <div class="option-desc">The system migrates to your own VPS. Full migration documentation included. DataBridge provides no ongoing support under this option unless you return for a paid update.</div>
+    </div>
+    <div class="option-block">
+      <span class="option-label">Option C</span>
+      <div class="option-title">Make.com Free Tier Migration — Free</div>
+      <div class="option-desc">Available for teams with under ~1,000 workflow executions per month. DataBridge assists with migration at no ongoing cost.</div>
+    </div>
+    <div class="highlight-box">
+      <strong>No hidden fees.</strong> You choose your option at handoff. No ongoing obligation is created by the build fee alone.
+    </div>
+  </div>
+
+  <div class="section" id="s4">
+    <span class="section-num">Section 04</span>
+    <h2>Delivery Timeline and Process</h2>
+    <p><strong>Build timeline:</strong> 2 weeks from payment confirmation.</p>
+    <p><strong>All communication:</strong> Async only — email and Notion. No video calls.</p>
+    <p><strong>Revisions:</strong> One round of async revisions included. Additional revisions outside original scope are quoted separately.</p>
+    <p><strong>Delay by Client:</strong> If Client fails to provide required data access within 5 business days of payment, the build timeline resets from the date access is provided.</p>
+  </div>
+
+  <div class="section" id="s5">
+    <span class="section-num">Section 05</span>
+    <h2>Data Access and Privacy</h2>
+    <p><strong>What DataBridge accesses:</strong> Read-only access to the specific Google Sheets or Excel files you identify during intake. We access only what is required to build and test the System.</p>
+    <p><strong>What DataBridge does not do:</strong> We do not store copies of your operational data on DataBridge-owned servers. We do not use your data to train AI models or improve DataBridge products. We do not share your data with any third party not disclosed in these Terms or the accompanying Data Processing Agreement. We do not retain access to your data sources after engagement ends under Options B and C.</p>
+    <p><strong>Third-party services:</strong> The System uses n8n (self-hosted), the Anthropic Claude API, Google Sheets API or Microsoft OneDrive, and the Slack API. By proceeding, you acknowledge their involvement. Full details in the <a href="dpa.html" style="color:var(--teal);">Data Processing Agreement</a>.</p>
+    <p><strong>Data retention:</strong> Workflow run logs are purged after 30 days. Your contact information is retained for the duration of the engagement plus 90 days, then deleted unless you request earlier deletion.</p>
+    <p><strong>Your rights:</strong> You may request deletion of your contact information and any DataBridge-held records at any time by emailing build@databridgeops.com. We will action deletion requests within 10 business days.</p>
+  </div>
+
+  <div class="section" id="s6">
+    <span class="section-num">Section 06</span>
+    <h2>Client Responsibilities</h2>
+    <p>You are responsible for providing accurate information in the intake form, ensuring you have authority to share the data sources with DataBridge, maintaining the security of your own systems and credentials, and notifying DataBridge if you suspect any unauthorized access to your DataBridge system.</p>
+  </div>
+
+  <div class="section" id="s7">
+    <span class="section-num">Section 07</span>
+    <h2>Payment Terms</h2>
+    <p>Payment is processed via Stripe on intake confirmation. All fees are in USD. The build fee is non-refundable once the data audit phase (Days 1–3) is complete. If DataBridge determines at the data audit stage that your setup is outside our build scope, a full refund is issued.</p>
+  </div>
+
+  <div class="section" id="s8">
+    <span class="section-num">Section 08</span>
+    <h2>Intellectual Property</h2>
+    <p>You own your data at all times. DataBridge retains the right to reuse general configuration patterns, automation structures, and methodology in future client builds. No client-specific data is retained or reused. Documentation and Loom walkthroughs delivered to you are yours to keep and share internally.</p>
+  </div>
+
+  <div class="section" id="s9">
+    <span class="section-num">Section 09</span>
+    <h2>Limitation of Liability</h2>
+    <p>DataBridge's liability is limited to the amount you paid for the build fee. We are not liable for decisions made based on System outputs, interruptions caused by third-party service outages (Slack, Google, Anthropic, VPS providers), or data loss caused by Client-side actions.</p>
+    <div class="highlight-box">The System is a reporting and intelligence tool. It does not make business decisions. All operational decisions remain your responsibility.</div>
+  </div>
+
+  <div class="section" id="s10">
+    <span class="section-num">Section 10</span>
+    <h2>Termination</h2>
+    <p>Either party may terminate the engagement at any time. Under Option A (retainer), 30 days written notice is required to cancel. DataBridge will provide a handoff package within 30 days of termination notice under any option.</p>
+  </div>
+
+  <div class="section" id="s11">
+    <span class="section-num">Section 11</span>
+    <h2>Governing Law</h2>
+    <p>These Terms are governed by the laws of the Republic of the Philippines, without regard to conflict of law principles. Any disputes will be resolved through good-faith negotiation first.</p>
+  </div>
+
+  <div class="section" id="s12">
+    <span class="section-num">Section 12</span>
+    <h2>Changes to These Terms</h2>
+    <p>DataBridge may update these Terms. Existing clients will be notified of material changes via email. Continued use of the System after notification constitutes acceptance.</p>
+  </div>
+
+  <div class="contact-block">
+    <p style="color:var(--slate-light); font-size:0.875rem; margin-bottom:0.75rem;">Questions about these Terms?</p>
+    <p><a href="mailto:build@databridgeops.com">build@databridgeops.com</a></p>
+    <p style="font-size:0.8rem; color:var(--slate); margin-top:0.5rem;">Response within 2 business days · No calls</p>
+  </div>
+
+</div>
+
+<footer>
+  <a href="index.html" class="logo" style="text-decoration:none;">Data<span style="color:var(--teal)">Bridge</span></a>
+  <p>© 2026 DataBridge Ops · <a href="terms.html">Terms</a> · <a href="dpa.html">DPA</a> · <a href="about.html">About</a></p>
+</footer>
+
+</body>
+</html>
