@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title data-content="page_title">DataBridge Ops: OT & Leave Filing for Shift-Based Teams</title>
+<meta name="description" content="Overtime and leave filing built for shift-based teams. Computes the Philippine OT math the cheap tools ignore, without the HRIS price tag. $699 one-time, no calls.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:       #0F1F2E;
+    --navy-mid:   #1E3A4F;
+    --navy-light: #2A5170;
+    --off-white:  #F0F4F8;
+    --teal:       #00C2A8;
+    --teal-dim:   #007A6B;
+    --slate:      #6B8FA8;
+    --slate-light:#A8C0D0;
+    --text:       #E8EFF5;
+    --text-dim:   #8AACC0;
+    --glow:       rgba(0,194,168,0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a{color:inherit;}
+  ::selection{background:var(--teal); color:var(--navy);}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity 0.65s ease, transform 0.65s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+
+  .wrap{max-width:1120px; margin:0 auto; padding:0 2.5rem;}
+  section{padding:6.5rem 0;}
+  @media (max-width:720px){ section{padding:4rem 0;} .wrap{padding:0 1.5rem;} }
+
+  nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1.25rem 2.5rem; position:fixed; top:0; left:0; right:0; z-index:200;
+    transition:background 0.3s, border-color 0.3s; border-bottom:1px solid transparent;
+  }
+  nav.scrolled{ background:rgba(15,31,46,0.94); backdrop-filter:blur(14px); border-color:rgba(255,255,255,0.07); }
+  .logo{ font-family:'DM Serif Display', serif; font-size:1.25rem; color:var(--off-white); letter-spacing:-0.01em; text-decoration:none; }
+  .logo span{ color:var(--teal); }
+  .logo-ops{ font-family:'Inter', sans-serif; font-size:0.7rem; font-weight:500; color:var(--slate); letter-spacing:0.08em; text-transform:uppercase; margin-left:0.35rem; }
+  .nav-links{ display:flex; align-items:center; gap:2rem; list-style:none; }
+  .nav-links a{ color:var(--text-dim); text-decoration:none; font-size:0.9rem; transition:color 0.2s; }
+  .nav-links a:hover{ color:var(--off-white); }
+  .nav-links a.active{ color:var(--teal); }
+  .nav-links .nav-cta{ background:var(--teal); color:var(--navy); font-weight:600; padding:0.6rem 1.2rem; border-radius:8px; font-size:0.85rem; }
+  .nav-links .nav-cta:hover{ color:var(--navy); }
+  @media (max-width:820px){ .nav-links{display:none;} }
+
+  h1,h2,h3{ font-family:'DM Serif Display', serif; font-weight:400; line-height:1.1; letter-spacing:-0.01em; }
+  h1{font-size:clamp(2.1rem,5vw,3.4rem);}
+  h2{font-size:clamp(1.7rem,3.4vw,2.35rem);}
+  h3{font-size:1.2rem;}
+  p{color:var(--text-dim);}
+  .lede{font-size:1.125rem; color:var(--text); opacity:0.88; max-width:52ch;}
+
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:1.1rem; display:flex; align-items:center; gap:0.6rem;
+  }
+  .eyebrow::before{ content:""; width:16px; height:1px; background:var(--teal); }
+
+  .btn-primary{
+    display:inline-block; background:var(--teal); color:var(--navy); font-weight:600; font-size:0.9375rem;
+    padding:0.9rem 2rem; border-radius:8px; text-decoration:none; transition:opacity 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,194,168,0.25); }
+  .btn-ghost{
+    display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; color:var(--text-dim); text-decoration:none;
+    transition:color 0.2s; border:1px solid rgba(255,255,255,0.14); padding:0.85rem 1.7rem; border-radius:8px;
+  }
+  .btn-ghost:hover{ color:var(--off-white); border-color:var(--teal); }
+
+  .hero{ padding-top:9.5rem; padding-bottom:4rem; }
+  .hero-grid{ display:grid; grid-template-columns:1.1fr 0.9fr; gap:3.5rem; align-items:center; }
+  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} }
+  .hero h1{ margin-bottom:1.25rem; }
+  .hero .lede{ margin-bottom:2rem; }
+  .hero-actions{ display:flex; align-items:center; gap:1.1rem; flex-wrap:wrap; }
+  .hero-meta{ margin-top:1.25rem; font-size:0.8rem; color:var(--slate); font-family:'JetBrains Mono', monospace; }
+
+  .timeline-card{
+    background:var(--navy-mid); border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px; padding:1.6rem 1.5rem 1.4rem;
+    box-shadow:0 20px 60px rgba(0,0,0,0.35);
+  }
+  .tl-head{ display:flex; justify-content:space-between; align-items:baseline; margin-bottom:1.1rem; }
+  .tl-title{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.06em; color:var(--slate); text-transform:uppercase; }
+  .tl-day{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--text-dim); }
+
+  .tl-bar{ position:relative; height:44px; border-radius:6px; overflow:hidden; background:var(--navy-light); display:flex; }
+  .tl-seg{ height:100%; position:relative; }
+  .seg-reg{ background:#2A4A63; flex:8; }
+  .seg-ot{ background:var(--teal); flex:2.5; }
+  .nd-overlay{
+    position:absolute; top:0; bottom:0;
+    background:repeating-linear-gradient(45deg, rgba(168,192,208,0.18), rgba(168,192,208,0.18) 4px, transparent 4px, transparent 8px);
+    border-left:1px solid var(--slate-light); border-right:1px solid var(--slate-light);
+    left:83.3%; width:16.7%;
+  }
+  .tl-marker{ position:absolute; top:0; bottom:0; width:2px; background:var(--off-white); opacity:0.55; left:0%; animation:sweep 6s ease-in-out infinite; }
+  @keyframes sweep{ 0%{left:0%;} 50%{left:100%;} 100%{left:0%;} }
+  @media (prefers-reduced-motion: reduce){ .tl-marker{animation:none; display:none;} }
+
+  .tl-axis{ display:flex; justify-content:space-between; font-family:'JetBrains Mono', monospace; font-size:0.68rem; color:var(--slate); margin-top:0.55rem; }
+
+  .tl-legend{ display:flex; flex-direction:column; gap:0.6rem; margin-top:1.4rem; }
+  .tl-legend-row{ display:flex; align-items:center; gap:0.6rem; font-family:'JetBrains Mono', monospace; font-size:0.8rem; color:var(--text); opacity:0.9; }
+  .swatch{ width:12px; height:12px; border-radius:3px; flex-shrink:0; }
+  .swatch-reg{ background:#2A4A63; }
+  .swatch-ot{ background:var(--teal); }
+  .swatch-nd{ background:transparent; border:1px solid var(--slate-light); }
+  .tl-legend-row .rate{ margin-left:auto; color:var(--teal); }
+
+  .ledger{ border-top:1px solid rgba(255,255,255,0.08); }
+  .ledger-row{ display:flex; align-items:baseline; gap:1rem; padding:1rem 0; border-bottom:1px solid rgba(255,255,255,0.08); }
+  .ledger-row .tick{ font-family:'JetBrains Mono', monospace; color:var(--teal); font-size:0.9rem; flex-shrink:0; width:18px; }
+  .ledger-row .txt{ color:var(--text); opacity:0.92; font-size:0.98rem; }
+
+  .two-col{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:3.5rem; align-items:start; }
+  @media (max-width:820px){ .two-col{grid-template-columns:1fr; gap:1.75rem;} }
+  .body-copy{ font-size:1.02rem; color:var(--text-dim); max-width:60ch; }
+  .body-copy + .body-copy{ margin-top:1rem; }
+
+  .compare-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.08); margin-top:2.25rem; border-radius:10px; overflow:hidden; }
+  @media (max-width:760px){ .compare-grid{grid-template-columns:1fr;} }
+  .compare-col{ background:var(--navy-mid); padding:1.5rem 1.4rem; }
+  .compare-col.hi{ background:var(--navy-light); border-top:2px solid var(--teal); }
+  .compare-col h4{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--slate); margin-bottom:0.85rem; }
+  .compare-col .figure{ font-family:'JetBrains Mono', monospace; font-size:1.4rem; color:var(--off-white); margin-bottom:0.4rem; }
+  .compare-col .note{ font-size:0.85rem; color:var(--text-dim); }
+
+  .price-grid{ display:grid; grid-template-columns:1fr; gap:1.4rem; margin-top:2.75rem; }
+  .price-card{ background:var(--navy-mid); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:2.25rem; }
+  .price-card.primary{ border-color:var(--teal); box-shadow:0 0 0 1px rgba(0,194,168,0.15), 0 20px 50px rgba(0,0,0,0.3); }
+  .price-top{ display:flex; justify-content:space-between; align-items:flex-start; gap:1.25rem; flex-wrap:wrap; margin-bottom:1.4rem; }
+  .price-figure{ font-family:'JetBrains Mono', monospace; font-weight:500; font-size:2.5rem; color:var(--off-white); }
+  .price-figure .period{ font-size:0.85rem; color:var(--slate); font-weight:400; }
+  .price-tag{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--navy); background:var(--teal); padding:0.3rem 0.65rem; border-radius:4px; }
+  .price-note{ margin-top:1.6rem; padding-top:1.25rem; border-top:1px solid rgba(255,255,255,0.08); font-size:0.88rem; color:var(--text-dim); }
+
+  .price-secondary{
+    background:transparent; border:1px dashed rgba(255,255,255,0.18); border-radius:12px;
+    padding:1.75rem 2rem; margin-top:1rem;
+    display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap;
+  }
+  .price-secondary .label{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--slate); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:0.4rem; }
+  .price-secondary .figure{ font-family:'JetBrains Mono', monospace; font-size:1.5rem; color:var(--off-white); }
+
+  .cross-sell{
+    background:linear-gradient(135deg, var(--navy-mid), var(--navy));
+    border:1px solid rgba(255,255,255,0.08);
+    border-radius:12px; padding:2rem 2.25rem; margin-top:1.5rem;
+    display:flex; justify-content:space-between; align-items:center; gap:1.5rem; flex-wrap:wrap;
+  }
+  .cross-sell .eyebrow{ margin-bottom:0.5rem; color:var(--slate-light); }
+  .cross-sell .eyebrow::before{ background:var(--slate-light); }
+  .cross-sell h4{ font-family:'DM Serif Display', serif; font-size:1.15rem; font-weight:400; color:var(--off-white); margin-bottom:0.4rem; }
+  .cross-sell p{ font-size:0.92rem; max-width:48ch; }
+
+  .steps{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.08); border-radius:10px; overflow:hidden; margin-top:2.5rem; }
+  @media (max-width:900px){ .steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .steps{grid-template-columns:1fr;} }
+  .step{ background:var(--navy-mid); padding:1.6rem 1.4rem; }
+  .step-num{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; color:var(--teal); margin-bottom:0.9rem; }
+  .step h4{ font-family:'DM Serif Display', serif; font-size:1.05rem; font-weight:400; margin-bottom:0.5rem; color:var(--off-white); }
+  .step p{ font-size:0.88rem; line-height:1.55; }
+
+  .faq-item{ border-bottom:1px solid rgba(255,255,255,0.08); padding:1.4rem 0; }
+  .faq-q{ font-family:'DM Serif Display', serif; font-size:1.08rem; font-weight:400; color:var(--off-white); margin-bottom:0.5rem; }
+  .faq-a{ font-size:0.95rem; color:var(--text-dim); max-width:62ch; }
+
+  .final-cta{
+    text-align:center; padding:6.5rem 0;
+    background:radial-gradient(ellipse at 50% 0%, var(--glow), transparent 60%);
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .final-cta h2{ margin-bottom:1rem; }
+  .final-cta .hero-meta{ margin-top:1.25rem; }
+
+  footer{
+    padding:2rem 2.5rem; border-top:1px solid rgba(255,255,255,0.06);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+  }
+  @media (max-width:600px){ footer{ flex-direction:column; align-items:flex-start; } }
+  footer p{ font-size:0.85rem; color:var(--slate); }
+</style>
+</head>
+<body>
+
+<nav id="main-nav">
+  <a href="index.html" class="logo">Data<span>Bridge</span><span class="logo-ops">Ops</span></a>
+  <ul class="nav-links">
+    <li><a href="#problem">The Problem</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="index.html" data-content="nav_index">Ops Intelligence</a></li>
+    <li><a href="about.html" data-content="nav_about">About</a></li>
+    <li><a href="#pricing" class="nav-cta">Start your build, $699</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <p class="eyebrow" data-content="hero_eyebrow">OT & Leave Filing - Philippines</p>
+        <h1 data-content="hero_h1">Overtime and leave filing, built for shift-based teams.</h1>
+        <p class="lede" data-content="hero_sub">The cheap PTO trackers do not compute Philippine overtime.</p>
+        <div class="hero-actions">
+          <a class="btn-primary" href="#pricing" data-content="hero_cta_primary">Start your build</a>
+          <a class="btn-ghost" href="#how" data-content="hero_cta_secondary">See how it works</a>
+        </div>
+        <p class="hero-meta" data-content="hero_meta">One fixed price. No calls. Delivered in two weeks.</p>
+      </div>
+
+      <div class="timeline-card reveal">
+        <div class="tl-head">
+          <span class="tl-title" data-content="tl_title">Sample 8-hour shift, computed</span>
+          <span class="tl-day" data-content="tl_day">2:00 PM to 12:00 AM</span>
+        </div>
+        <div class="tl-bar">
+          <div class="tl-marker"></div>
+          <div class="tl-seg seg-reg"></div>
+          <div class="tl-seg seg-ot"></div>
+          <div class="nd-overlay"></div>
+        </div>
+        <div class="tl-axis"><span>2 PM</span><span>6 PM</span><span>10 PM</span><span>12 AM</span></div>
+        <div class="tl-legend">
+          <div class="tl-legend-row"><span class="swatch swatch-reg"></span> <span data-content="tl_legend_1">Ordinary hours</span> <span class="rate" data-content="tl_legend_1_rate">1.00x</span></div>
+          <div class="tl-legend-row"><span class="swatch swatch-ot"></span> <span data-content="tl_legend_2">Overtime, past 8 hrs</span> <span class="rate" data-content="tl_legend_2_rate">1.25x</span></div>
+          <div class="tl-legend-row"><span class="swatch swatch-nd"></span> <span data-content="tl_legend_3">Night differential, 10PM-6AM</span> <span class="rate" data-content="tl_legend_3_rate">+10%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="problem">
+    <div class="wrap two-col reveal">
+      <div>
+        <p class="eyebrow" data-content="problem_eyebrow">The problem</p>
+        <h2 data-content="problem_h2">Your team is still tracking overtime in a spreadsheet.</h2>
+      </div>
+      <div>
+        <p class="body-copy" data-content="problem_body_1">If you run a shift-based or 24/7 team, you already know the problem.</p>
+        <p class="body-copy" data-content="problem_body_2">The off-the-shelf tools do not fix this.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two-col reveal">
+      <div>
+        <p class="eyebrow" data-content="get_eyebrow">What you get</p>
+        <h2 data-content="get_h2">A filing system that actually does the math.</h2>
+        <p class="body-copy" style="margin-top:1.1rem;" data-content="get_sub">Payroll stays your system of record.</p>
+      </div>
+      <div class="ledger">
+        <div class="ledger-row"><span class="tick">→</span><span class="txt" data-content="get_1">Employees file overtime and leave requests in a clean interface.</span></div>
+        <div class="ledger-row"><span class="tick">→</span><span class="txt" data-content="get_2">Managers approve or decline in one place, no email chains.</span></div>
+        <div class="ledger-row"><span class="tick">→</span><span class="txt" data-content="get_3">The system computes OT premiums, night differential, and holiday and rest day pay automatically.</span></div>
+        <div class="ledger-row"><span class="tick">→</span><span class="txt" data-content="get_4">Clean reports export straight to whoever runs your payroll.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <p class="eyebrow" data-content="why_eyebrow">Why not just use a PTO app</p>
+      <h2 data-content="why_h2">Because they cannot compute your overtime.</h2>
+      <p class="body-copy" style="margin-top:1.1rem;" data-content="why_body">The popular leave trackers start around one to four dollars per user each month.</p>
+
+      <div class="compare-grid">
+        <div class="compare-col">
+          <h4 data-content="compare_1_name">Generic PTO tool, 100 people</h4>
+          <div class="figure" data-content="compare_1_figure">$2,400+ / yr</div>
+          <div class="note" data-content="compare_1_note">Forever, and it still can't compute a single hour of night differential.</div>
+        </div>
+        <div class="compare-col">
+          <h4 data-content="compare_2_name">Enterprise HRIS</h4>
+          <div class="figure" data-content="compare_2_figure">Overkill</div>
+          <div class="note" data-content="compare_2_note">Handles OT, but heavy and priced for a whole company.</div>
+        </div>
+        <div class="compare-col hi">
+          <h4 data-content="compare_3_name">DataBridge Ops</h4>
+          <div class="figure" data-content="compare_3_figure">$699 once</div>
+          <div class="note" data-content="compare_3_note">Correct PH overtime math, yours outright.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap reveal">
+      <p class="eyebrow" data-content="pricing_eyebrow">Pricing</p>
+      <h2 data-content="pricing_h2">One price. Everything included.</h2>
+
+      <div class="price-grid">
+        <div class="price-card primary">
+          <div class="price-top">
+            <div>
+              <span class="price-tag" data-content="price_tag">Standard - lead offer</span>
+              <div class="price-figure" style="margin-top:0.9rem;"><span data-content="price_figure">$699</span><span class="period" data-content="price_period"> one-time</span></div>
+            </div>
+            <a class="btn-primary" href="#intake" data-content="price_cta">Start your build</a>
+          </div>
+          <div class="ledger">
+            <div class="ledger-row"><span class="tick">→</span><span class="txt" data-content="price_1">Your configured OT and leave filing system, hosted by us</span></div>
+            <div class="ledger-row"><span class="tick">→</span><span class="txt" data-content="price_2">Employee filing and manager approval workflows</span></div>
+            <div class="ledger-row"><span class="tick">→</span><span class="txt" data-content="price_3">Automated OT, night differential, and holiday pay computation</span></div>
+            <div class="ledger-row"><span class="tick">→</span><span class="txt" data-content="price_4">Payroll-ready exports, full documentation, walkthrough video</span></div>
+            <div class="ledger-row" style="border-bottom:none;"><span class="tick">→</span><span class="txt" data-content="price_5">One round of revisions</span></div>
+          </div>
+          <p class="price-note" data-content="price_note">Ongoing support, optional, offered after delivery.</p>
+        </div>
+
+        <div class="price-secondary">
+          <div>
+            <div class="label" data-content="price_sec_label">Need your own instance?</div>
+            <div class="figure" data-content="price_sec_figure">Dedicated - $999 one-time</div>
+            <p class="body-copy" style="margin-top:0.5rem; max-width:46ch;" data-content="price_sec_body">Same system, your own private instance.</p>
+          </div>
+          <a class="btn-ghost" href="#intake" data-content="price_sec_cta">Ask about Dedicated</a>
+        </div>
+
+        <div class="cross-sell">
+          <div>
+            <p class="eyebrow" data-content="cross_eyebrow">Running more than filing</p>
+            <h4 data-content="cross_h4">Need daily reporting and on-demand ops intelligence too?</h4>
+            <p data-content="cross_body">DataBridge Ops also builds a full ops intelligence system.</p>
+          </div>
+          <a class="btn-ghost" href="index.html" data-content="cross_cta">See the flagship system →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap reveal">
+      <p class="eyebrow" data-content="how_eyebrow">How it works</p>
+      <h2 data-content="how_h2">No calls. No meetings. Just the build.</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h4 data-content="how_1_title">Tell us about your team</h4>
+          <p data-content="how_1_body">One intake form: your shift structure, overtime rules, who approves what.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h4 data-content="how_2_title">We build it</h4>
+          <p data-content="how_2_body">Configured for your team, delivered in two weeks.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h4 data-content="how_3_title">You review</h4>
+          <p data-content="how_3_body">Walkthrough video plus documentation, on your own time.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h4 data-content="how_4_title">You own it</h4>
+          <p data-content="how_4_body">Full handoff, with your hosting options stated up front.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal" style="max-width:820px;">
+      <p class="eyebrow" data-content="faq_eyebrow">FAQ</p>
+      <div class="faq-item">
+        <div class="faq-q" data-content="faq_1_q">Does this replace our payroll system?</div>
+        <div class="faq-a" data-content="faq_1_a">No. Payroll stays your system of record.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-content="faq_2_q">What if our overtime rules are unusual?</div>
+        <div class="faq-a" data-content="faq_2_a">The intake form captures your exact structure.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-content="faq_3_q">We are not in the Philippines. Can you still build it?</div>
+        <div class="faq-a" data-content="faq_3_a">Yes. Philippine rules are what we build first.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-content="faq_4_q">How long does it take?</div>
+        <div class="faq-a" data-content="faq_4_a">Two weeks from the day you submit intake and payment.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" data-content="faq_5_q">Is our data safe?</div>
+        <div class="faq-a" data-content="faq_5_a">On the standard plan, your data is isolated by strict access controls.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="intake" class="final-cta reveal">
+    <div class="wrap">
+      <p class="eyebrow" style="justify-content:center;" data-content="final_eyebrow">Ready</p>
+      <h2 data-content="final_h2">Stop maintaining the spreadsheet.</h2>
+      <a class="btn-primary" href="#" style="margin-top:0.5rem;" data-content="final_cta">Start your build</a>
+      <p class="hero-meta" data-content="final_meta">$699 one-time. Two weeks. No calls.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <a href="index.html" class="logo" style="text-decoration:none;">Data<span style="color:var(--teal)">Bridge</span><span class="logo-ops">Ops</span></a>
+  <p><span data-content="copyright">© 2026 DataBridge Ops</span> · <span data-content="email">build@databridgeops.com</span> · <a href="about.html" style="color:var(--slate);text-decoration:none;" data-content="footer_about">About</a> · <a href="terms.html" style="color:var(--slate);text-decoration:none;" data-content="footer_terms">Terms</a> · <a href="dpa.html" style="color:var(--slate);text-decoration:none;" data-content="footer_dpa">DPA</a></p>
+</footer>
+
+<script src="content.js"></script>
+<script>
+  if (typeof applyContent === 'function') applyContent('product02');
+
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>

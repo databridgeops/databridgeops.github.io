@@ -1,823 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About: DataBridge Ops</title>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title data-content="page_title">About: DataBridge Ops</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --navy:       #0F1F2E;
-      --navy-mid:   #1E3A4F;
-      --navy-light: #2A5170;
-      --off-white:  #F0F4F8;
-      --teal:       #00C2A8;
-      --teal-dim:   #007A6B;
-      --slate:      #6B8FA8;
-      --slate-light:#A8C0D0;
-      --text:       #E8EFF5;
-      --text-dim:   #8AACC0;
-      --glow:       rgba(0,194,168,0.10);
-    }
+  :root {
+    --navy:       #0F1F2E;
+    --navy-mid:   #1E3A4F;
+    --navy-light: #2A5170;
+    --off-white:  #F0F4F8;
+    --teal:       #00C2A8;
+    --teal-dim:   #007A6B;
+    --slate:      #6B8FA8;
+    --slate-light:#A8C0D0;
+    --text:       #E8EFF5;
+    --text-dim:   #8AACC0;
+    --glow:       rgba(0,194,168,0.10);
+  }
 
-    html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
 
-    body {
-      background: var(--navy);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
+  body {
+    background: var(--navy);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
 
-    /* ── REVEAL ── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-    .reveal-left {
-      opacity: 0; transform: translateX(-28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal-left.visible { opacity: 1; transform: translateX(0); }
-    .reveal-right {
-      opacity: 0; transform: translateX(28px);
-      transition: opacity 0.65s ease, transform 0.65s ease;
-    }
-    .reveal-right.visible { opacity: 1; transform: translateX(0); }
-    .delay-1 { transition-delay: 0.1s; }
-    .delay-2 { transition-delay: 0.22s; }
-    .delay-3 { transition-delay: 0.34s; }
-    .delay-4 { transition-delay: 0.46s; }
+  a{color:inherit;}
+  ::selection{background:var(--teal); color:var(--navy);}
+  :focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
 
-    /* ── NAV ── */
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1.25rem 2.5rem;
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 200;
-      transition: background 0.3s, border-color 0.3s;
-      border-bottom: 1px solid transparent;
-    }
-    nav.scrolled {
-      background: rgba(15,31,46,0.94);
-      backdrop-filter: blur(14px);
-      border-color: rgba(255,255,255,0.07);
-    }
-    .logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.25rem;
-      color: var(--off-white);
-      text-decoration: none;
-    }
-    .logo span { color: var(--teal); }
-    .logo-ops {
-      font-family: 'Inter', sans-serif;
-      font-size: 0.7rem;
-      font-weight: 500;
-      color: var(--slate);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-left: 0.4rem;
-      vertical-align: middle;
-    }
-    .nav-links {
-      display: flex; align-items: center; gap: 2rem; list-style: none;
-    }
-    .nav-links a {
-      font-size: 0.875rem; color: var(--text-dim);
-      text-decoration: none; transition: color 0.2s;
-    }
-    .nav-links a:hover, .nav-links a.active { color: var(--off-white); }
-    .nav-cta {
-      font-size: 0.875rem; font-weight: 500;
-      color: var(--navy) !important;
-      background: var(--teal);
-      padding: 0.5rem 1.25rem; border-radius: 6px;
-      text-decoration: none; transition: opacity 0.15s !important;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-    @media (max-width: 680px) {
-      .nav-links { display: none; }
-      nav { padding: 1rem 1.25rem; }
-    }
+  .reveal{opacity:0; transform:translateY(24px); transition:opacity 0.65s ease, transform 0.65s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
 
-    /* ── DIVIDER ── */
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.07) 30%, rgba(255,255,255,0.07) 70%, transparent);
-      margin: 0 2.5rem;
-    }
+  .wrap{max-width:1120px; margin:0 auto; padding:0 2.5rem;}
+  section{padding:6rem 0;}
+  @media (max-width:720px){ section{padding:3.5rem 0;} .wrap{padding:0 1.5rem;} }
 
-    /* ── SECTION BASE ── */
-    section { padding: 6rem 2.5rem; }
-    .inner { max-width: 780px; margin: 0 auto; }
-    .inner-wide { max-width: 1020px; margin: 0 auto; }
+  /* NAV */
+  nav{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1.25rem 2.5rem; position:fixed; top:0; left:0; right:0; z-index:200;
+    transition:background 0.3s, border-color 0.3s; border-bottom:1px solid transparent;
+  }
+  nav.scrolled{ background:rgba(15,31,46,0.94); backdrop-filter:blur(14px); border-color:rgba(255,255,255,0.07); }
+  .logo{ font-family:'DM Serif Display', serif; font-size:1.25rem; color:var(--off-white); letter-spacing:-0.01em; text-decoration:none; }
+  .logo span{ color:var(--teal); }
+  .logo-ops{ font-family:'Inter', sans-serif; font-size:0.7rem; font-weight:500; color:var(--slate); letter-spacing:0.08em; text-transform:uppercase; margin-left:0.35rem; }
+  .nav-links{ display:flex; align-items:center; gap:2rem; list-style:none; }
+  .nav-links a{ color:var(--text-dim); text-decoration:none; font-size:0.9rem; transition:color 0.2s; }
+  .nav-links a:hover{ color:var(--off-white); }
+  .nav-links a.active{ color:var(--teal); }
+  .nav-links .nav-cta{ background:var(--teal); color:var(--navy); font-weight:600; padding:0.6rem 1.2rem; border-radius:8px; font-size:0.85rem; }
+  .nav-links .nav-cta:hover{ color:var(--navy); }
+  @media (max-width:820px){ .nav-links{display:none;} }
 
-    .eyebrow {
-      font-size: 0.68rem; font-weight: 600;
-      letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--teal); margin-bottom: 1rem;
-      display: block;
-    }
+  h1,h2,h3{ font-family:'DM Serif Display', serif; font-weight:400; line-height:1.12; letter-spacing:-0.01em; }
+  h1{font-size:clamp(2rem,4.6vw,3.1rem);}
+  h2{font-size:clamp(1.6rem,3.2vw,2.2rem);}
+  h3{font-size:1.15rem;}
+  p{color:var(--text-dim);}
+  .lede{font-size:1.1rem; color:var(--text); opacity:0.88; max-width:56ch;}
 
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2.5rem, 5.5vw, 3.75rem);
-      line-height: 1.12; letter-spacing: -0.025em;
-      color: var(--off-white); margin-bottom: 1.5rem;
-    }
-    h1 em { font-style: italic; color: var(--teal); }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace; font-size:0.75rem; letter-spacing:0.12em; text-transform:uppercase;
+    color:var(--teal); margin-bottom:1.1rem; display:flex; align-items:center; gap:0.6rem;
+  }
+  .eyebrow::before{ content:""; width:16px; height:1px; background:var(--teal); }
 
-    h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
-      line-height: 1.18; letter-spacing: -0.022em;
-      color: var(--off-white); margin-bottom: 1rem;
-    }
-    h2 em { font-style: italic; color: var(--teal); }
+  .btn-primary{
+    display:inline-block; background:var(--teal); color:var(--navy); font-weight:600; font-size:0.9375rem;
+    padding:0.9rem 2rem; border-radius:8px; text-decoration:none; transition:opacity 0.15s, transform 0.15s, box-shadow 0.15s;
+  }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 8px 24px rgba(0,194,168,0.25); }
+  .btn-ghost{
+    display:inline-flex; align-items:center; gap:0.4rem; font-size:0.9rem; color:var(--text-dim); text-decoration:none;
+    transition:color 0.2s; border:1px solid rgba(255,255,255,0.14); padding:0.85rem 1.7rem; border-radius:8px;
+  }
+  .btn-ghost:hover{ color:var(--off-white); border-color:var(--teal); }
 
-    .lead {
-      font-size: 1.125rem; color: var(--text-dim);
-      line-height: 1.78; font-weight: 300; max-width: 600px;
-    }
+  .about-hero{ padding-top:9.5rem; padding-bottom:3rem; }
+  .about-hero h1{ max-width:16ch; margin-bottom:1.4rem; }
+  .about-hero .lede{ max-width:58ch; }
 
-    .body-text {
-      font-size: 1rem; color: var(--text-dim);
-      line-height: 1.8; max-width: 640px;
-    }
-    .body-text + .body-text { margin-top: 1.25rem; }
+  .two-col{ display:grid; grid-template-columns:0.85fr 1.15fr; gap:3.5rem; align-items:start; }
+  @media (max-width:820px){ .two-col{grid-template-columns:1fr; gap:1.75rem;} }
+  .body-copy{ font-size:1.02rem; color:var(--text-dim); max-width:62ch; }
+  .body-copy + .body-copy{ margin-top:1rem; }
 
-    /* ── HERO ── */
-    .hero-wrap {
-      min-height: 80vh;
-      display: flex; align-items: center;
-      padding: 10rem 2.5rem 5rem;
-      position: relative; overflow: hidden;
-    }
+  .cred-row{ display:flex; gap:1.5rem; padding:1.6rem 0; border-top:1px solid rgba(255,255,255,0.08); }
+  .cred-row:last-child{ border-bottom:1px solid rgba(255,255,255,0.08); }
+  .cred-num{ font-family:'JetBrains Mono', monospace; color:var(--teal); font-size:0.85rem; flex-shrink:0; padding-top:0.2rem; }
+  .cred-row h4{ font-family:'DM Serif Display', serif; font-weight:400; font-size:1.1rem; color:var(--off-white); margin-bottom:0.4rem; }
+  .cred-row p{ font-size:0.95rem; max-width:58ch; }
 
-    .hero-orb {
-      position: absolute; top: 30%; left: 50%;
-      transform: translateX(-50%);
-      width: 600px; height: 600px;
-      background: radial-gradient(ellipse, rgba(0,194,168,0.08), transparent 70%);
-      pointer-events: none;
-    }
+  .dual-strip{ display:grid; grid-template-columns:1fr 1fr; gap:1.4rem; margin-top:2.5rem; }
+  @media (max-width:780px){ .dual-strip{grid-template-columns:1fr;} }
+  .dual-card{ background:var(--navy-mid); border:1px solid rgba(255,255,255,0.08); border-radius:12px; padding:2rem; }
+  .dual-card.lead{ border-color:var(--teal); box-shadow:0 0 0 1px rgba(0,194,168,0.15); }
+  .dual-tag{ font-family:'JetBrains Mono', monospace; font-size:0.68rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--slate); margin-bottom:0.9rem; display:block; }
+  .dual-card.lead .dual-tag{ color:var(--teal); }
+  .dual-card h3{ margin-bottom:0.6rem; color:var(--off-white); }
+  .dual-card p{ font-size:0.95rem; margin-bottom:1.4rem; }
+  .dual-price{ font-family:'JetBrains Mono', monospace; font-size:1.3rem; color:var(--off-white); margin-bottom:1.2rem; }
+  .dual-price span{ font-size:0.75rem; color:var(--slate); font-weight:400; }
 
-    .hero-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(0,194,168,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,194,168,0.03) 1px, transparent 1px);
-      background-size: 60px 60px;
-      pointer-events: none;
-      mask-image: radial-gradient(ellipse 70% 80% at 50% 50%, black 20%, transparent 100%);
-    }
+  .ledger-table{ margin-top:2.5rem; border-top:1px solid rgba(255,255,255,0.08); }
+  .ledger-table-head{
+    display:grid; grid-template-columns:0.9fr 1.6fr 2fr; gap:1.5rem; padding:0.9rem 0;
+    font-family:'JetBrains Mono', monospace; font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--slate);
+  }
+  .ledger-table-row{ display:grid; grid-template-columns:0.9fr 1.6fr 2fr; gap:1.5rem; padding:1.3rem 0; border-top:1px solid rgba(255,255,255,0.08); align-items:start; }
+  @media (max-width:800px){ .ledger-table-head{display:none;} .ledger-table-row{grid-template-columns:1fr; gap:0.4rem; padding:1.5rem 0;} }
+  .lt-period{ font-family:'JetBrains Mono', monospace; font-size:0.85rem; color:var(--slate-light); }
+  .lt-context{ font-size:0.92rem; color:var(--text); }
+  .lt-outcome{ font-size:0.92rem; color:var(--text-dim); }
 
-    .hero-inner { position: relative; z-index: 2; max-width: 720px; margin: 0 auto; text-align: center; }
-    .hero-answer { align-items: stretch; }
-    .answer-line { text-align: left; }
+  .stack-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.08); border-radius:10px; overflow:hidden; margin-top:1.5rem; }
+  @media (max-width:700px){ .stack-grid{grid-template-columns:1fr;} }
+  .stack-card{ background:var(--navy-mid); padding:1.6rem 1.5rem; }
+  .stack-card .stack-name{ font-family:'JetBrains Mono', monospace; font-size:1rem; color:var(--teal); margin-bottom:0.3rem; }
+  .stack-card .stack-role{ font-family:'JetBrains Mono', monospace; font-size:0.7rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--slate); margin-bottom:0.7rem; }
+  .stack-card p{ font-size:0.88rem; line-height:1.55; }
+  .stack-group-label{ font-family:'JetBrains Mono', monospace; font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--slate-light); margin:2.5rem 0 0.5rem; }
+  .stack-group-label:first-of-type{ margin-top:1.5rem; }
 
-    /* The question — signature typographic treatment */
-    .hero-question {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; color: var(--slate);
-      letter-spacing: 0.08em; margin-bottom: 2rem;
-      display: flex; align-items: center; gap: 0.75rem;
-    }
-    .hero-question::before {
-      content: '//';
-      color: var(--teal); font-weight: 500;
-    }
+  .principle-row{ display:flex; gap:1.5rem; padding:1.6rem 0; border-top:1px solid rgba(255,255,255,0.08); }
+  .principle-row:last-child{ border-bottom:1px solid rgba(255,255,255,0.08); }
+  .principle-num{ font-family:'JetBrains Mono', monospace; color:var(--slate); font-size:0.85rem; flex-shrink:0; padding-top:0.2rem; }
+  .principle-row h4{ font-family:'DM Serif Display', serif; font-weight:400; font-size:1.05rem; color:var(--off-white); margin-bottom:0.4rem; }
+  .principle-row p{ font-size:0.92rem; max-width:58ch; }
 
-    .hero-answer {
-      margin-top: 2rem;
-      display: flex; flex-direction: column; gap: 1rem;
-      max-width: 580px;
-    }
+  .final-cta{
+    text-align:center; padding:6rem 0;
+    background:radial-gradient(ellipse at 50% 0%, var(--glow), transparent 60%);
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .final-cta h2{ margin-bottom:1rem; }
+  .final-cta .cta-actions{ display:flex; justify-content:center; gap:1rem; flex-wrap:wrap; margin-top:0.5rem; }
+  .final-cta .hero-meta{ margin-top:1.4rem; font-size:0.8rem; color:var(--slate); font-family:'JetBrains Mono', monospace; }
 
-    .answer-line {
-      display: flex; align-items: flex-start; gap: 1rem;
-      padding: 1rem 1.25rem;
-      background: rgba(30,58,79,0.4);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 10px;
-      transition: border-color 0.2s;
-    }
-    .answer-line:hover { border-color: rgba(0,194,168,0.2); }
-
-    .answer-icon {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem; color: var(--teal);
-      flex-shrink: 0; padding-top: 2px;
-      width: 20px;
-    }
-
-    .answer-text {
-      font-size: 0.9375rem; color: var(--text-dim); line-height: 1.6;
-    }
-    .answer-text strong { color: var(--text); font-weight: 500; }
-
-    /* ── OPS LOG — signature section ── */
-    .ops-log-section { background: #0c1c28; }
-
-    .log-intro {
-      max-width: 520px;
-      margin-bottom: 3.5rem;
-    }
-
-    .log-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-family: 'JetBrains Mono', monospace;
-    }
-
-    .log-table thead tr {
-      border-bottom: 1px solid rgba(0,194,168,0.2);
-    }
-
-    .log-table th {
-      font-size: 0.65rem;
-      color: var(--teal);
-      font-weight: 500;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 0 1rem 0.875rem 0;
-      text-align: left;
-    }
-
-    .log-table tbody tr {
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      transition: background 0.2s;
-    }
-    .log-table tbody tr:hover { background: rgba(0,194,168,0.03); }
-
-    .log-table td {
-      padding: 1.125rem 1rem 1.125rem 0;
-      vertical-align: top;
-      font-size: 0.78rem;
-      line-height: 1.55;
-    }
-
-    .log-year {
-      color: var(--teal);
-      font-weight: 500;
-      white-space: nowrap;
-      width: 80px;
-    }
-
-    .log-context {
-      color: var(--slate-light);
-      width: 200px;
-    }
-
-    .log-outcome {
-      color: var(--text-dim);
-    }
-    .log-outcome .hi { color: var(--teal); }
-    .log-outcome .num {
-      color: var(--off-white);
-      font-weight: 500;
-    }
-
-    @media (max-width: 680px) {
-      .log-table thead { display: none; }
-      .log-table tbody tr {
-        display: flex; flex-direction: column;
-        padding: 1.25rem 0; gap: 0.375rem;
-      }
-      .log-table td { padding: 0; width: 100%; }
-      .log-year { font-size: 0.7rem; }
-    }
-
-    /* ── STACK SECTION ── */
-    .stack-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px;
-      overflow: hidden;
-      margin-top: 3rem;
-    }
-    @media (max-width: 560px) {
-      .stack-grid { grid-template-columns: 1fr; }
-    }
-
-    .stack-item {
-      background: var(--navy);
-      padding: 1.75rem;
-      transition: background 0.2s;
-    }
-    .stack-item:hover { background: #122333; }
-
-    .stack-name {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--teal); margin-bottom: 0.5rem;
-    }
-
-    .stack-role {
-      font-size: 0.8125rem; font-weight: 600;
-      color: var(--off-white); margin-bottom: 0.375rem;
-    }
-
-    .stack-desc {
-      font-size: 0.8rem; color: var(--text-dim); line-height: 1.6;
-    }
-
-    /* ── PRIVACY SECTION ── */
-    .privacy-section { background: #0c1c28; }
-
-    .privacy-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-      margin-top: 3rem;
-    }
-    @media (max-width: 680px) {
-      .privacy-grid { grid-template-columns: 1fr; gap: 2rem; }
-    }
-
-    .privacy-principle {
-      display: flex; flex-direction: column; gap: 1.5rem;
-    }
-
-    .principle-item {
-      padding: 1.5rem;
-      background: rgba(30,58,79,0.4);
-      border: 1px solid rgba(0,194,168,0.1);
-      border-radius: 12px;
-      transition: border-color 0.2s;
-    }
-    .principle-item:hover { border-color: rgba(0,194,168,0.25); }
-
-    .principle-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; font-weight: 500;
-      color: var(--teal); letter-spacing: 0.08em;
-      text-transform: uppercase; margin-bottom: 0.5rem;
-    }
-
-    .principle-title {
-      font-size: 0.9375rem; font-weight: 600;
-      color: var(--off-white); margin-bottom: 0.375rem;
-    }
-
-    .principle-desc {
-      font-size: 0.8125rem; color: var(--text-dim); line-height: 1.65;
-    }
-
-    /* Sub-processor table */
-    .sub-processor-wrap {
-      padding: 1.75rem;
-      background: rgba(30,58,79,0.4);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px;
-    }
-
-    .sp-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem; font-weight: 500;
-      color: var(--slate); letter-spacing: 0.08em;
-      text-transform: uppercase; margin-bottom: 1.25rem;
-    }
-
-    .sp-row {
-      display: flex; justify-content: space-between;
-      align-items: flex-start; gap: 1rem;
-      padding: 0.875rem 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-      font-size: 0.8rem;
-    }
-    .sp-row:last-child { border-bottom: none; }
-
-    .sp-name {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--off-white); font-weight: 500;
-      flex-shrink: 0; width: 100px;
-    }
-    .sp-purpose { color: var(--text-dim); flex: 1; }
-    .sp-note {
-      font-size: 0.7rem; color: var(--slate);
-      flex-shrink: 0; text-align: right;
-    }
-
-    /* ── HOW WE WORK ── */
-    .how-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-    @media (max-width: 680px) {
-      .how-grid { grid-template-columns: 1fr; }
-    }
-
-    .how-item {
-      padding: 1.75rem;
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 12px;
-      transition: border-color 0.2s, background 0.2s;
-    }
-    .how-item:hover {
-      border-color: rgba(0,194,168,0.15);
-      background: rgba(30,58,79,0.3);
-    }
-
-    .how-num {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 1.5rem; font-weight: 500;
-      color: rgba(0,194,168,0.2); margin-bottom: 0.875rem;
-      line-height: 1;
-    }
-
-    .how-title {
-      font-size: 0.9375rem; font-weight: 600;
-      color: var(--off-white); margin-bottom: 0.375rem;
-    }
-
-    .how-desc {
-      font-size: 0.8125rem; color: var(--text-dim); line-height: 1.65;
-    }
-
-    /* ── CTA STRIP ── */
-    .cta-strip {
-      text-align: center;
-      padding: 5rem 2.5rem;
-      position: relative; overflow: hidden;
-    }
-    .cta-strip::before {
-      content: '';
-      position: absolute; bottom: -80px; left: 50%;
-      transform: translateX(-50%);
-      width: 500px; height: 300px;
-      background: radial-gradient(ellipse, rgba(0,194,168,0.07), transparent 70%);
-      pointer-events: none;
-    }
-    .cta-strip h2 { margin-bottom: 0.75rem; }
-    .cta-strip p { color: var(--text-dim); margin-bottom: 2rem; }
-
-    .cta-group {
-      display: flex; align-items: center;
-      justify-content: center; gap: 1rem; flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-block;
-      background: var(--teal); color: var(--navy);
-      font-weight: 600; font-size: 0.9375rem;
-      padding: 0.875rem 2rem; border-radius: 8px;
-      text-decoration: none;
-      transition: opacity 0.15s, transform 0.15s, box-shadow 0.15s;
-    }
-    .btn-primary:hover {
-      opacity: 0.9; transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,194,168,0.2);
-    }
-
-    .btn-ghost {
-      display: inline-block;
-      border: 1px solid rgba(255,255,255,0.12);
-      color: var(--text-dim); font-size: 0.875rem;
-      padding: 0.875rem 1.75rem; border-radius: 8px;
-      text-decoration: none;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .btn-ghost:hover { border-color: rgba(0,194,168,0.3); color: var(--off-white); }
-
-    /* ── FOOTER ── */
-    footer {
-      padding: 2rem 2.5rem;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      display: flex; justify-content: space-between;
-      align-items: center; flex-wrap: wrap; gap: 1rem;
-    }
-    footer p { font-size: 0.75rem; color: var(--slate); }
-
-    @media (max-width: 600px) {
-      section { padding: 4rem 1.25rem; }
-      .hero-wrap { padding: 8rem 1.25rem 4rem; }
-      footer { flex-direction: column; align-items: flex-start; }
-      .divider { margin: 0 1.25rem; }
-    }
-  </style>
+  footer{
+    padding:2rem 2.5rem; border-top:1px solid rgba(255,255,255,0.06);
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;
+  }
+  @media (max-width:600px){ footer{ flex-direction:column; align-items:flex-start; } }
+  footer p{ font-size:0.85rem; color:var(--slate); }
+</style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav id="main-nav">
   <a href="index.html" class="logo">Data<span>Bridge</span><span class="logo-ops">Ops</span></a>
   <ul class="nav-links">
-    <li><a href="index.html#problem">The Problem</a></li>
-    <li><a href="index.html#layers">What You Get</a></li>
-    <li><a href="index.html#pricing">Pricing</a></li>
-    <li><a href="about.html" class="active">About</a></li>
-    <li><a href="index.html#get-started" class="nav-cta">Get started, $1,500</a></li>
+    <li><a href="product02.html" data-content="nav_product02">OT & Leave Filing</a></li>
+    <li><a href="index.html" data-content="nav_index">Ops Intelligence</a></li>
+    <li><a href="about.html" class="active" data-content="nav_about">About</a></li>
+    <li><a href="product02.html#pricing" class="nav-cta">Start your build, $699</a></li>
   </ul>
 </nav>
 
-<!-- HERO -->
-<div class="hero-wrap">
-  <div class="hero-orb"></div>
-  <div class="hero-grid"></div>
-  <div class="hero-inner">
-    <div class="hero-question reveal">// who builds a tool like this?</div>
-    <h1 class="reveal delay-1">People who've done<br /><em>this work themselves.</em></h1>
-    <p class="lead reveal delay-2">DataBridge Ops wasn't designed from a whiteboard. It was designed from inside a data operations team, managing offshore workflows, assembling manual reports, and commissioning data investigations for decisions that needed answers yesterday.</p>
+<main>
 
-    <div class="hero-answer">
-      <div class="answer-line reveal delay-2">
-        <div class="answer-icon">01</div>
-        <div class="answer-text"><strong>Operators, not consultants.</strong> We've run the kind of teams our clients outsource. Accountable for output, not just observing it.</div>
-      </div>
-      <div class="answer-line reveal delay-3">
-        <div class="answer-icon">02</div>
-        <div class="answer-text"><strong>Regulated industry experience.</strong> We've integrated AI tools into live production workflows where accuracy directly affected client-facing products.</div>
-      </div>
-      <div class="answer-line reveal delay-4">
-        <div class="answer-icon">03</div>
-        <div class="answer-text"><strong>Privacy-first by default.</strong> We've worked in environments where data handling is a regulated obligation. That shapes how we build everything.</div>
-      </div>
+  <section class="about-hero">
+    <div class="wrap reveal">
+      <p class="eyebrow" data-content="hero_question">// who builds a tool like this?</p>
+      <h1><span data-content="hero_h1_line1">People who've done</span> <em style="color:var(--teal); font-style:italic;" data-content="hero_h1_line2">this work themselves, twice over.</em></h1>
+      <p class="lede" data-content="hero_sub">DataBridge Ops wasn't designed from a whiteboard.</p>
     </div>
-  </div>
-</div>
+  </section>
 
-<div class="divider"></div>
-
-<!-- OPS LOG — SIGNATURE SECTION -->
-<section class="ops-log-section">
-  <div class="inner-wide">
-    <div class="log-intro reveal">
-      <span class="eyebrow">Track record</span>
-      <h2>What we've actually done</h2>
-      <p class="lead" style="font-size:0.9375rem;">Not a list of credentials. An operational ledger: contexts anonymised, outcomes real.</p>
-    </div>
-
-    <div class="reveal delay-1">
-      <table class="log-table">
-        <thead>
-          <tr>
-            <th>Period</th>
-            <th>Context</th>
-            <th>Outcome</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td class="log-year">2024–2026</td>
-            <td class="log-context">Life sciences data intelligence · offshore team of 22 · 10+ active workflows</td>
-            <td class="log-outcome">Output scaled <span class="num">3×</span> on quality compliance documents. Error rate reduced from <span class="num">3.44%</span> to <span class="num">1.45%</span>, a <span class="hi">58% reduction</span>, through process discipline, not headcount.</td>
-          </tr>
-          <tr>
-            <td class="log-year">2024–2025</td>
-            <td class="log-context">Regulatory intelligence · AI translation tool procurement and integration</td>
-            <td class="log-outcome">Led end-to-end vendor evaluation, onboarding, and workflow integration. Result: <span class="hi">25% reduction</span> in per-page processing time, <span class="num">1.8×</span> throughput on translated pages year-over-year.</td>
-          </tr>
-          <tr>
-            <td class="log-year">2024–2025</td>
-            <td class="log-context">FOIA/ATI request operations · multi-jurisdiction compliance tracking</td>
-            <td class="log-outcome">Request volume doubled (<span class="num">2×</span>) year-over-year. Managed entirely through manual coordination, the exact problem DataBridge Ops' L1 layer was designed to solve.</td>
-          </tr>
-          <tr>
-            <td class="log-year">2025</td>
-            <td class="log-context">Invoice and billing audit · regulated industry client</td>
-            <td class="log-outcome">Manual review process identified billing inconsistencies. <span class="hi">~$11,000 recovered</span> in a single year through careful document review, not automation. A reminder of what human judgment still does best.</td>
-          </tr>
-          <tr>
-            <td class="log-year">2024–2025</td>
-            <td class="log-context">Surge reallocation analysis · 22-person cross-trained team</td>
-            <td class="log-outcome">Built resource allocation models under time pressure, manually, using spreadsheets and Claude. Took <span class="num">2–5 days</span> per investigation. L3 was designed to answer these questions in minutes, not days.</td>
-          </tr>
-          <tr>
-            <td class="log-year">Ongoing</td>
-            <td class="log-context">Multi-industry ops delivery · no playbooks, variable contexts</td>
-            <td class="log-outcome">10+ years executing across BPO, life sciences, regulatory compliance, project delivery. Built frameworks from scratch repeatedly. DataBridge Ops is what we wished existed.</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- TECH STACK -->
-<section>
-  <div class="inner">
-    <span class="eyebrow reveal">How we build</span>
-    <h2 class="reveal delay-1">A lean, deliberate stack.<br /><em>No black boxes.</em></h2>
-    <p class="body-text reveal delay-2">Every DataBridge Ops system is built on the same four components, chosen because they're open, auditable, and don't require your data to pass through systems you didn't choose.</p>
-
-    <div class="stack-grid">
-      <div class="stack-item reveal delay-1">
-        <div class="stack-name">n8n</div>
-        <div class="stack-role">Automation layer</div>
-        <div class="stack-desc">Self-hosted, open-source. Runs on your infrastructure or ours, your choice at handoff. No third-party SaaS handling your operational data. No execution limits.</div>
+  <section>
+    <div class="wrap two-col reveal">
+      <div>
+        <p class="eyebrow">Credibility</p>
+        <h2>Operators, not consultants.</h2>
       </div>
-      <div class="stack-item reveal delay-2">
-        <div class="stack-name">Claude API</div>
-        <div class="stack-role">Intelligence layer (L3)</div>
-        <div class="stack-desc">Powers the plain-language query interface. We've integrated Claude into production ops workflows for regulated industry clients. We know how it behaves under real conditions.</div>
-      </div>
-      <div class="stack-item reveal delay-3">
-        <div class="stack-name">Google Sheets / Excel</div>
-        <div class="stack-role">Data source</div>
-        <div class="stack-desc">Your data, where it already lives. No migration. No new tools for your team to learn. Read-only access by default. We take only what the build requires.</div>
-      </div>
-      <div class="stack-item reveal delay-4">
-        <div class="stack-name">Slack / Teams / Chat</div>
-        <div class="stack-role">Delivery layer</div>
-        <div class="stack-desc">Reports go where your team already works, whether that's Slack, Microsoft Teams, or Google Chat. No new dashboard to log into. No training required. The system fits around your workflow, not the other way around.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
-<!-- PRIVACY -->
-<section class="privacy-section">
-  <div class="inner-wide">
-    <div class="inner" style="padding:0; margin-bottom:0;">
-      <span class="eyebrow reveal">Data privacy</span>
-      <h2 class="reveal delay-1">Your data stays yours.<br /><em>No exceptions.</em></h2>
-      <p class="body-text reveal delay-2">We've worked in environments where data handling is a regulated obligation, not a checkbox. That shapes how we build DataBridge Ops systems.</p>
-    </div>
-
-    <div class="privacy-grid">
-      <div class="privacy-principle">
-        <div class="principle-item reveal delay-1">
-          <div class="principle-label">Principle 01</div>
-          <div class="principle-title">We read. We don't store.</div>
-          <div class="principle-desc">DataBridge Ops reads your operational data on trigger to generate reports and answers. We don't copy it to any DataBridge Ops-owned database. It passes through the automation layer and goes to its destination. That's it.</div>
-        </div>
-        <div class="principle-item reveal delay-2">
-          <div class="principle-label">Principle 02</div>
-          <div class="principle-title">Read-only by default.</div>
-          <div class="principle-desc">We request the minimum access needed to build your system. Read-only access to your specified data sources. No admin permissions. No access beyond what the build requires.</div>
-        </div>
-        <div class="principle-item reveal delay-3">
-          <div class="principle-label">Principle 03</div>
-          <div class="principle-title">You can revoke access at any time.</div>
-          <div class="principle-desc">Your Notion portal includes step-by-step instructions for disconnecting DataBridge Ops' access to your data sources. You don't need to ask us. You're in control.</div>
-        </div>
-        <div class="principle-item reveal delay-4">
-          <div class="principle-label">Principle 04</div>
-          <div class="principle-title">No AI training on your data.</div>
-          <div class="principle-desc">Your operational data is not used to improve DataBridge Ops products, train AI models, or inform any other client's system. What's yours stays yours.</div>
-        </div>
-      </div>
-
-      <div class="reveal reveal-right delay-1">
-        <div class="sub-processor-wrap">
-          <div class="sp-label">Third-party services: disclosed before you pay</div>
-          <div class="sp-row">
-            <div class="sp-name">n8n</div>
-            <div class="sp-purpose">Automation layer, self-hosted. No external data access.</div>
-            <div class="sp-note">Self-hosted</div>
-          </div>
-          <div class="sp-row">
-            <div class="sp-name">Anthropic</div>
-            <div class="sp-purpose">Claude API, processes L3 query inputs only.</div>
-            <div class="sp-note">US-based</div>
-          </div>
-          <div class="sp-row">
-            <div class="sp-name">Google</div>
-            <div class="sp-purpose">Sheets API, reads your specified files. Read-only.</div>
-            <div class="sp-note">US-based</div>
-          </div>
-          <div class="sp-row">
-            <div class="sp-name">Slack</div>
-            <div class="sp-purpose">API, delivers reports to your workspace. Used if you choose Slack.</div>
-            <div class="sp-note">US-based</div>
-          </div>
-          <div class="sp-row">
-            <div class="sp-name">Microsoft</div>
-            <div class="sp-purpose">Teams API, delivers reports to your workspace. Used if you choose Teams.</div>
-            <div class="sp-note">US-based</div>
-          </div>
-          <div class="sp-row">
-            <div class="sp-name">Google Chat</div>
-            <div class="sp-purpose">API, delivers reports to your workspace. Used if you choose Google Chat.</div>
-            <div class="sp-note">US-based</div>
-          </div>
-          <div class="sp-row">
-            <div class="sp-name">VPS host</div>
-            <div class="sp-purpose">Infrastructure, hosts the n8n instance during your engagement.</div>
-            <div class="sp-note">Disclosed at build</div>
+      <div>
+        <div class="cred-row">
+          <span class="cred-num">01</span>
+          <div>
+            <h4 data-content="cred_1_title">Operators, not consultants.</h4>
+            <p data-content="cred_1_body">We've run the kind of teams our clients outsource.</p>
           </div>
         </div>
-
-        <div style="margin-top:1.5rem; padding:1.25rem 1.5rem; background:rgba(0,194,168,0.05); border:1px solid rgba(0,194,168,0.15); border-radius:10px;">
-          <div class="sp-label" style="margin-bottom:0.75rem;">Workflow run logs</div>
-          <p style="font-size:0.8125rem; color:var(--text-dim); line-height:1.65;">Purged automatically after 30 days. Your operational data is never retained beyond what passes through the automation layer in real time.</p>
+        <div class="cred-row">
+          <span class="cred-num">02</span>
+          <div>
+            <h4 data-content="cred_2_title">Regulated industry experience.</h4>
+            <p data-content="cred_2_body">We've integrated AI tools into live production workflows.</p>
+          </div>
         </div>
-
-        <div style="margin-top:1rem; padding:1.25rem 1.5rem; background:rgba(30,58,79,0.4); border:1px solid rgba(255,255,255,0.06); border-radius:10px;">
-          <div class="sp-label" style="margin-bottom:0.75rem;">Documentation</div>
-          <p style="font-size:0.8125rem; color:var(--text-dim); line-height:1.65; margin-bottom:0.875rem;">Full data handling details are in our Terms of Service and Data Processing Agreement, both written in plain English, both available before you commit.</p>
-          <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
-            <a href="terms.html" style="font-size:0.78rem; color:var(--teal); text-decoration:none; border-bottom:1px solid rgba(0,194,168,0.3);">Terms of Service →</a>
-            <a href="dpa.html" style="font-size:0.78rem; color:var(--teal); text-decoration:none; border-bottom:1px solid rgba(0,194,168,0.3);">Data Processing Agreement →</a>
+        <div class="cred-row">
+          <span class="cred-num">03</span>
+          <div>
+            <h4 data-content="cred_3_title">We built the OT filing system for our own team first.</h4>
+            <p data-content="cred_3_body">Before DataBridge Ops sold anything.</p>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+  <section>
+    <div class="wrap reveal">
+      <p class="eyebrow" data-content="dual_eyebrow">Two builds, one operator</p>
+      <h2 data-content="dual_h2">What DataBridge Ops actually builds.</h2>
+      <p class="body-copy" style="margin-top:1.1rem;" data-content="dual_body">Both products come from the same place.</p>
 
-<!-- HOW WE WORK -->
-<section>
-  <div class="inner">
-    <span class="eyebrow reveal">How we work</span>
-    <h2 class="reveal delay-1">Async. Lean. <em>No calls.</em></h2>
-    <p class="body-text reveal delay-2">There's no account manager between you and the person building your system. No handoff from sales to delivery to support. Everything runs through documented, async processes. By design, not by accident.</p>
-
-    <div class="how-grid">
-      <div class="how-item reveal delay-1">
-        <div class="how-num">01</div>
-        <div class="how-title">Intake, not discovery</div>
-        <div class="how-desc">One form collects everything needed to build. No kickoff call. No scoping session. The intake is the brief.</div>
-      </div>
-      <div class="how-item reveal delay-2">
-        <div class="how-num">02</div>
-        <div class="how-title">Build, not manage</div>
-        <div class="how-desc">Two weeks from payment to delivery. No status meetings. No check-ins. Progress shared via async update only if something material changes.</div>
-      </div>
-      <div class="how-item reveal delay-3">
-        <div class="how-num">03</div>
-        <div class="how-title">Handoff, not dependency</div>
-        <div class="how-desc">Every system comes with full documentation and the option to move it to your own infrastructure. You're not locked in. We prefer clients who stay because the system works, not because leaving is hard.</div>
+      <div class="dual-strip">
+        <div class="dual-card lead">
+          <span class="dual-tag" data-content="dual_1_tag">Current focus</span>
+          <h3 data-content="dual_1_name">OT & Leave Filing</h3>
+          <p data-content="dual_1_desc">Overtime and leave filing built for shift-based teams.</p>
+          <div class="dual-price"><span data-content="dual_1_price">$699</span> <span data-content="dual_1_price_note">one-time, Standard</span></div>
+          <a class="btn-primary" href="product02.html" data-content="dual_1_cta">See the product →</a>
+        </div>
+        <div class="dual-card">
+          <span class="dual-tag" data-content="dual_2_tag">Also available</span>
+          <h3 data-content="dual_2_name">Ops Intelligence</h3>
+          <p data-content="dual_2_desc">An automated reporting and on-demand query system.</p>
+          <div class="dual-price"><span data-content="dual_2_price">$1,500</span> <span data-content="dual_2_price_note">one-time, flagship</span></div>
+          <a class="btn-ghost" href="index.html" data-content="dual_2_cta">See the product →</a>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<div class="divider"></div>
+  <section>
+    <div class="wrap reveal">
+      <p class="eyebrow" data-content="log_eyebrow">Track record</p>
+      <h2 data-content="log_h2">What we've actually done.</h2>
+      <p class="body-copy" style="margin-top:1.1rem;" data-content="log_sub">Not a list of credentials.</p>
 
-<!-- CTA STRIP -->
-<section class="cta-strip">
-  <span class="eyebrow reveal">Ready to see it in action?</span>
-  <h2 class="reveal delay-1">Start with a free ops audit.<br /><em>No commitment required.</em></h2>
-  <p class="reveal delay-2">Submit the survey, describe your team's situation, and we'll deliver a structured async report: what we see, what it means, and what DataBridge Ops would build for you. Yours to keep regardless of next steps.</p>
-  <div class="cta-group reveal delay-3">
-    <a href="index.html#get-started" class="btn-primary">Request a free audit</a>
-    <a href="index.html#layers" class="btn-ghost">See the product →</a>
-  </div>
-</section>
+      <div class="ledger-table">
+        <div class="ledger-table-head"><span>Period</span><span>Context</span><span>Outcome</span></div>
 
-<!-- FOOTER -->
+        <div class="ledger-table-row">
+          <span class="lt-period" data-content="log_1_period">2024-2026</span>
+          <span class="lt-context" data-content="log_1_context">Life sciences data intelligence</span>
+          <span class="lt-outcome" data-content="log_1_outcome">Output scaled 3x.</span>
+        </div>
+        <div class="ledger-table-row">
+          <span class="lt-period" data-content="log_2_period">2024-2026</span>
+          <span class="lt-context" data-content="log_2_context">Shift based operations</span>
+          <span class="lt-outcome" data-content="log_2_outcome">Replaced a buggy internal tool.</span>
+        </div>
+        <div class="ledger-table-row">
+          <span class="lt-period" data-content="log_3_period">2024-2025</span>
+          <span class="lt-context" data-content="log_3_context">Regulatory intelligence</span>
+          <span class="lt-outcome" data-content="log_3_outcome">Led end to end vendor evaluation.</span>
+        </div>
+        <div class="ledger-table-row">
+          <span class="lt-period" data-content="log_4_period">2024-2025</span>
+          <span class="lt-context" data-content="log_4_context">FOIA/ATI request operations</span>
+          <span class="lt-outcome" data-content="log_4_outcome">Request volume doubled.</span>
+        </div>
+        <div class="ledger-table-row">
+          <span class="lt-period" data-content="log_5_period">2025</span>
+          <span class="lt-context" data-content="log_5_context">Invoice and billing audit</span>
+          <span class="lt-outcome" data-content="log_5_outcome">Manual review process identified billing inconsistencies.</span>
+        </div>
+        <div class="ledger-table-row">
+          <span class="lt-period" data-content="log_6_period">Ongoing</span>
+          <span class="lt-context" data-content="log_6_context">Multi-industry ops delivery</span>
+          <span class="lt-outcome" data-content="log_6_outcome">10+ years executing across BPO.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap reveal">
+      <p class="eyebrow" data-content="stack_eyebrow">How we build</p>
+      <h2><span data-content="stack_h2_line1">Lean, deliberate stacks.</span> <em style="color:var(--teal); font-style:italic;" data-content="stack_h2_line2">No black boxes.</em></h2>
+      <p class="body-copy" style="margin-top:1.1rem;" data-content="stack_body">Different products, different infrastructure.</p>
+
+      <div class="stack-group-label" data-content="stack_group_1">OT & Leave Filing</div>
+      <div class="stack-grid">
+        <div class="stack-card">
+          <div class="stack-name" data-content="stack_1_name">Next.js</div>
+          <div class="stack-role" data-content="stack_1_role">Application layer</div>
+          <p data-content="stack_1_desc">The employee filing interface.</p>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name" data-content="stack_2_name">Supabase</div>
+          <div class="stack-role" data-content="stack_2_role">Database, auth, isolation</div>
+          <p data-content="stack_2_desc">Postgres with Row Level Security.</p>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name" data-content="stack_3_name">Cloudflare Pages</div>
+          <div class="stack-role" data-content="stack_3_role">Hosting</div>
+          <p data-content="stack_3_desc">Free tier, commercial use allowed.</p>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name" data-content="stack_4_name">Lemon Squeezy / Paddle</div>
+          <div class="stack-role" data-content="stack_4_role">Payments</div>
+          <p data-content="stack_4_desc">Merchant of record.</p>
+        </div>
+      </div>
+
+      <div class="stack-group-label" data-content="stack_group_2">Ops Intelligence</div>
+      <div class="stack-grid">
+        <div class="stack-card">
+          <div class="stack-name" data-content="stack_5_name">n8n</div>
+          <div class="stack-role" data-content="stack_5_role">Automation layer</div>
+          <p data-content="stack_5_desc">Self-hosted, open-source.</p>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name" data-content="stack_6_name">Claude API</div>
+          <div class="stack-role" data-content="stack_6_role">Intelligence layer</div>
+          <p data-content="stack_6_desc">Powers the plain-language query interface.</p>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name" data-content="stack_7_name">Google Sheets / Excel</div>
+          <div class="stack-role" data-content="stack_7_role">Data source</div>
+          <p data-content="stack_7_desc">Your data, where it already lives.</p>
+        </div>
+        <div class="stack-card">
+          <div class="stack-name" data-content="stack_8_name">Slack / Teams / Chat</div>
+          <div class="stack-role" data-content="stack_8_role">Delivery layer</div>
+          <p data-content="stack_8_desc">Reports go where your team already works.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap two-col reveal">
+      <div>
+        <p class="eyebrow" data-content="how_eyebrow">How we work</p>
+        <h2><span data-content="how_h2_line1">Async. Lean.</span> <em style="color:var(--teal); font-style:italic;" data-content="how_h2_line2">No calls.</em></h2>
+      </div>
+      <div>
+        <div class="principle-row">
+          <span class="principle-num" data-content="how_1_num">01</span>
+          <div>
+            <h4 data-content="how_1_title">Intake, not discovery.</h4>
+            <p data-content="how_1_body">One form collects everything needed to build.</p>
+          </div>
+        </div>
+        <div class="principle-row">
+          <span class="principle-num" data-content="how_2_num">02</span>
+          <div>
+            <h4 data-content="how_2_title">Build, not manage.</h4>
+            <p data-content="how_2_body">Two weeks from payment to delivery.</p>
+          </div>
+        </div>
+        <div class="principle-row">
+          <span class="principle-num" data-content="how_3_num">03</span>
+          <div>
+            <h4 data-content="how_3_title">Handoff, not dependency.</h4>
+            <p data-content="how_3_body">Every system comes with full documentation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta reveal">
+    <div class="wrap">
+      <p class="eyebrow" style="justify-content:center;" data-content="cta_eyebrow">Ready</p>
+      <h2 data-content="cta_h2">Start with the build that fits right now.</h2>
+      <div class="cta-actions">
+        <a class="btn-primary" href="product02.html#pricing" data-content="cta_primary">Start your OT & Leave build, $699</a>
+        <a class="btn-ghost" href="index.html" data-content="cta_secondary">Explore Ops Intelligence</a>
+      </div>
+      <p class="hero-meta" data-content="cta_meta">No calls, either way.</p>
+    </div>
+  </section>
+
+</main>
+
 <footer>
   <a href="index.html" class="logo" style="text-decoration:none;">Data<span style="color:var(--teal)">Bridge</span><span class="logo-ops">Ops</span></a>
-  <p>© 2026 DataBridge Ops · build@databridgeops.com · <a href="terms.html" style="color:var(--slate); text-decoration:none;">Terms</a> · <a href="dpa.html" style="color:var(--slate); text-decoration:none;">DPA</a></p>
+  <p><span data-content="copyright">© 2026 DataBridge Ops</span> · <span data-content="email">build@databridgeops.com</span> · <a href="about.html" style="color:var(--slate);text-decoration:none;" data-content="footer_about">About</a> · <a href="terms.html" style="color:var(--slate);text-decoration:none;" data-content="footer_terms">Terms</a> · <a href="dpa.html" style="color:var(--slate);text-decoration:none;" data-content="footer_dpa">DPA</a></p>
 </footer>
-
-<script>
-  // Nav scroll
-  const nav = document.getElementById('main-nav');
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 40);
-  }, { passive: true });
-
-  // Reveal observer
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
-    observer.observe(el);
-  });
-</script>
 
 <script src="content.js"></script>
 <script>
   if (typeof applyContent === 'function') applyContent('about');
+
+  const nav = document.getElementById('main-nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+  });
+
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting){ e.target.classList.add('visible'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
 </script>
+
 </body>
 </html>
